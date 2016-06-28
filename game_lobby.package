@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package> 
+<package>
 
 	<!-- Styles -->
 	<style name="altav_current" color="#00b164" bordercolor="#00b164" />
@@ -13,7 +13,7 @@
 	<trigger name="GameLobby_FavHeroTrigger"/>
 	<trigger name="GameLobby_NewStats"/>
 	<trigger name="GameLobbyHeroPurchase"/>
-	
+
 	<trigger name="HeroSelectInford" />
 	<trigger name="HeroSelectInfonormal" />
 	<trigger name="HeroSelectInfobd" />
@@ -25,11 +25,11 @@
 	<trigger name="HeroSelectInfolp" />
 	<trigger name="HeroSelectInfogt" />
 	<trigger name="HeroSelectInfofp" />
+	<trigger name="HeroSelectInfosp" />
 	<trigger name="ClearHeroSelectInfo" />
 	<trigger name="WalkthroughHighlightReady" />
 	<trigger name="RefereeControlPage" />
 	<trigger name="CardListRefresh" />
-	
 	<template name="AAVButtonState">
 		<widgetstate statename="{statename}" x="{x}" y="{y}">
 			<image width="132%" height="33@" align="center" valign="center" texture="/ui/fe2/store/promo/storebtn_blank_{stateimage}.tga" noclick="true" />
@@ -72,15 +72,15 @@
 			onmousewheeldownlua="{onmousewheeldownlua}"
 			onmousewheeluplua="{onmousewheeluplua}"
 			onmouseover="{onmouseover}"
-			onmouseout="{onmouseout}"			
+			onmouseout="{onmouseout}"
 		>
 			<widgetstate statename="up">
 				<image texture="/ui/fe2/elements/scroll_arrow.tga" color="#fbc604" width="3.6h" height="2.5h" x="{x=0}" align="center" valign="center" rotation="{rotation}" />
-			</widgetstate>		
+			</widgetstate>
 			<widgetstate statename="over">
 				<image texture="/ui/fe2/elements/scroll_arrow.tga" color="1 1 1 1" width="3.6h" height="2.5h" x="{x=0}" align="center" valign="center" rotation="{rotation}" />
-			</widgetstate>			
-			<widgetstate statename="down" x="1" y="1">				
+			</widgetstate>
+			<widgetstate statename="down" x="1" y="1">
 				<image texture="/ui/fe2/elements/scroll_arrow.tga" color="1 1 1 1" width="3.6h" height="2.5h" x="{x=0}" align="center" valign="center" rotation="{rotation}" />
 			</widgetstate>
 		</button>
@@ -113,7 +113,7 @@
 			<frame texture="/ui/frames/roundframe.tga" color="#183042" borderthickness="0.6h" noclick="true" />
 			<frame name="mb_frame_{id}" visible="0" texture="/ui/frames/roundframe.tga" color=".8 .2 .2 1" borderthickness="0.6h" noclick="true" />
 			<label name="glb_multibotpickplate_index_{id}" visible="0" noclick="1" />
-			
+
 			<panel width="-1.0h" height="-1.0h" valign="center" align="center" noclick="true">
 				<panel width="100@" height="100%" noclick="true">
 					<image name="glb_multibotplate_{id}_icon" texture="/heroes/empath/icon.tga" noclick="true"/>
@@ -131,7 +131,7 @@
 			</panel>
 		</panel>
 	</template>
-	
+
 	<!-- For storing the last 10 match IDs -->
 	<trigger name="UpdateLastMatchIDs"/>
 		<!-- For() wasn't working quite as well as I wish it would for this.  Rewrite later... -->
@@ -190,11 +190,11 @@
 				param2 gt 0 or param3 gt 0,
 				CallEvent('globbyBuyHeroError', 0)
 			);
-			
+
 			If(
 				param2 gt 0 or param3 gt 0,
 				Set('_gLobbyHeroPurchaseEntity', '')
-			);			
+			);
 
 			If(
 				param1 == 3,
@@ -221,7 +221,7 @@
 					ServerRefreshUpgrades()
 				)
 			);
-		"		
+		"
 	/>
 
 	<trigger name="gLobbyBuyAvatarStatus"/>
@@ -461,7 +461,7 @@
 			(
 			PlaySound('/shared/sounds/ui/button_over_02.wav'),
 			ExplodeTrigger('GameLobby_NewStats', _psr_tipA{index}, '|', '::'),
-			If(Trigger('GameLobby_StatsFade', _psr_tipShow{index})),
+			Trigger('GameLobby_StatsFade', _psr_tipShow{index}),
 			ExplodeTrigger('GameLobby_RecentMatchTrigger', _psr_tipMatch{index}),
 			ExplodeTrigger('GameLobby_FavHeroTrigger', _psr_tipHero{index}),
 			ShowWidget('globby_viewstats_tip')
@@ -670,7 +670,7 @@
 				"
 				onmouseover="
 						ExplodeTrigger('GameLobby_NewStats', _psr_tipA{index}, '|', '::');
-						If(Trigger('GameLobby_StatsFade', _psr_tipShow{index}));
+						Trigger('GameLobby_StatsFade', _psr_tipShow{index});
 						ExplodeTrigger('GameLobby_RecentMatchTrigger', _psr_tipMatch{index});
 						ExplodeTrigger('GameLobby_FavHeroTrigger', _psr_tipHero{index});
 				"
@@ -726,7 +726,7 @@
 			<image name="player_side_disc_frame{index}" texture="lobby/mastery/sd_frame_iron.tga" noclick="true" hflip="1"
 				   watch="HeroSelectMastery{index}"
 				   ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/sd_frame_'..param0..'.tga')"/>
-			<image texture="lobby/mastery/sd_gear_iron.tga" width="25%" height="25%" y="15.6%" x="-1.2%" align="center" valign="center" noclick="true" 
+			<image texture="lobby/mastery/sd_gear_iron.tga" width="25%" height="25%" y="15.6%" x="-1.2%" align="center" valign="center" noclick="true"
 				   watch="HeroSelectMastery{index}"
 				   ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/sd_gear_'..param0..'.tga')"/>
 		</panel>
@@ -746,7 +746,7 @@
 			"
 		/>
 	</template>
-	
+
 	<panel
 		watch="PlayerCanBan" noclick="1"
 		ontrigger="if(param0, SleepWidget(2200, 'PlaySound(\'/shared/sounds/announcer/lobby/ban_hero.wav\')'));"
@@ -757,7 +757,7 @@
 	<template name="voice_button">
 		<button
 			onmouseover="PlaySound('/shared/sounds/ui/button_over_02.wav'); ShowWidget('globby_voice_tip');"
-			onmouseout="HideWidget('globby_voice_tip');" 
+			onmouseout="HideWidget('globby_voice_tip');"
 			color="invisible"
 			watch="LobbyPlayerInfo{index}"
 			ontrigger="
@@ -905,7 +905,7 @@
 
 			<!--	 watch="GamePhaseExtended" ontrigger="If(param0 == 2, If(param0 == 10, SetColor('1 0.7 0 1'), If(param0 == 8, SetColor('1 1 0 1'), SetColor('1 0 0 1'))), SetColor('0 1 0 1'));"
 			 sound triggers -->
-			
+
 
 			<!-- Slot Indication -->
 			<panel width="30h" height="16h" x="0h" y="1h" align="right" valign="center" watch="GamePhase" ontrigger="SetVisible(param0 gt 1 and param0 lt 4)" noclick="1" color="invisible" visible="0">
@@ -940,18 +940,18 @@
 					<!-- Panel 2 -->
 					<image name="player_slot_panel2{index}"   x="110.0@"  width="200@" height="100%" valign="bottom" align="right" noclick="true" hflip="1"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
-						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel2_iron.tga', 'lobby', self)" 	
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel2_iron.tga', 'lobby', self)"
 						watch="HeroSelectMastery{index}"
-				  		ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel2_'..param0..'.tga')"					
+				  		ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel2_'..param0..'.tga')"
 					/>
 
 					<!-- Panel 3  -->
 					<panel name="player_slot_panel3_slide{index}" x="160.0@" y="100%" width="400@" height="200%" noclick="true" valign="bottom" align="right" >
 						<image name="player_slot_panel3{index}" noclick="true" onload="Rotate(90, 1);" hflip="1"
 							resourcecontext="lobby" watch9="MainRegisterTextures"
-							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel3_iron.tga', 'lobby', self)" 	
+							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel3_iron.tga', 'lobby', self)"
 							watch="HeroSelectMastery{index}"
-				  			ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel3_'..param0..'.tga')"					
+				  			ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel3_'..param0..'.tga')"
 						/>
 					</panel>
 
@@ -960,15 +960,15 @@
 					<panel width="200@" height="100%"  valign="bottom" align="right" noclick="true">
 						<image name="player_slot_panel1{index}" x="50.0%" noclick="true" hflip="1"
 							resourcecontext="lobby" watch9="MainRegisterTextures"
-							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel1_iron.tga', 'lobby', self)" 	
+							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel1_iron.tga', 'lobby', self)"
 							watch="HeroSelectMastery{index}"
-				  		   	ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel1_'..param0..'.tga')"							
+				  		   	ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel1_'..param0..'.tga')"
 						/>
 						<image name="player_slot_left_door{index}" y="3%" height="-3.0%" x="50.0%" noclick="true" hflip="1"
 							resourcecontext="lobby" watch9="MainRegisterTextures"
-							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/near_door_iron.tga', 'lobby', self)" 
+							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/near_door_iron.tga', 'lobby', self)"
 							watch="HeroSelectMastery{index}"
-				  		   	ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/near_door_'..param0..'.tga')"							
+				  		   	ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/near_door_'..param0..'.tga')"
 						/>
 					</panel>
 
@@ -977,21 +977,21 @@
 						<panel name="player_slot_right_door_slide{index}" y="2%" height="-6.0%" noclick="true">
 							<image name="player_slot_right_door{index}" noclick="true" onload="Rotate(90, 1);" hflip="1"
 								resourcecontext="lobby" watch9="MainRegisterTextures"
-								ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/far_door_iron.tga', 'lobby', self)" 
+								ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/far_door_iron.tga', 'lobby', self)"
 								watch="HeroSelectMastery{index}"
-				  		   		ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/far_door_'..param0..'.tga')"						
+				  		   		ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/far_door_'..param0..'.tga')"
 							/>
 						</panel>
 
 						<image name="player_slot_panel3_cover{index}" noclick="true" onload="Rotate(90, 1);"  hflip="1"
 							resourcecontext="lobby" watch9="MainRegisterTextures"
-							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel3_cover_iron.tga', 'lobby', self)"	
+							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel3_cover_iron.tga', 'lobby', self)"
 							watch="HeroSelectMastery{index}"
-				  		   	ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel3_cover_'..param0..'.tga')"		
+				  		   	ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel3_cover_'..param0..'.tga')"
 						/>
-						<image name="player_slot_bolt{index}" y="-4.0%" x="0.5@" width="12.5@" height="12.5%" align="center" valign="center" noclick="true" onload="Rotate(0, 1);" 
+						<image name="player_slot_bolt{index}" y="-4.0%" x="0.5@" width="12.5@" height="12.5%" align="center" valign="center" noclick="true" onload="Rotate(0, 1);"
 							resourcecontext="lobby" watch9="MainRegisterTextures"
-							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/bolt.tga', 'lobby', self)"						
+							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/bolt.tga', 'lobby', self)"
 						/>
 
 						<!-- Leave Team Button -->
@@ -1049,7 +1049,7 @@
 									disabledmouseover="1"
 									disabledmouseout="1"
 									ontrigger="If(!param1 and param8 and !param9 and param11 and !param12, SetEnabled(1), SetEnabled(0));
-										If(param29, 
+										If(param29,
 											SetOnMouseOverDisabled('PlaySound(\'/shared/sounds/ui/button_over_02.wav\'); ShowWidget(\'globby_swap_hero_noeap_tip\');'),
 											SetOnMouseOverDisabled('')
 										);
@@ -1076,7 +1076,7 @@
 						<panel  width="72%" height="60%" x="1.1h" valign="center" align="right"
 								noclick="1"
 								watch="HeroSelectPlayerInfo{index}"
-								ontrigger="SetVisible(param30 or (param14 and !param26) or (param14 and (param41 == 6) and (param40 == 2)) or (param14 and (param40 == 11)));"	
+								ontrigger="SetVisible(param30 or (param14 and !param26) or (param14 and (param41 == 6) and (param40 == 2)) or (param14 and (param40 == 11)));"
 								visible="0"
 						>
 							<panel x="9.2%" float="right" padding="0" >
@@ -1095,30 +1095,30 @@
 								<panel watch="GamePhaseExtended" ontrigger="If(param0 == 2, SetColor('1 0 0 1'), If(param0 == 8, SetColor('1 0.7 0 1'), If(param0 == 9, SetColor('1 1 0 1'), SetColor('0 1 0 1'))));" onshow="SleepWidget(200,'Call(\'arrow_1_{index}\', \'setvisible(0); setvisible(1);\')'); fadeout(600);" texture="lobby/arrow_right.tga" name="arrow_5_{index}" width="100@" color="0 1 0 1" visible="1" />
 							</panel>
 
-							<label 	x="-68%" height="100%" font="dyn_10" textvalign="center" textalign="center" color="0 1 0 1" shadow="1" content="???"	
+							<label 	x="-68%" height="100%" font="dyn_10" textvalign="center" textalign="center" color="0 1 0 1" shadow="1" content="???"
 								watch="HeroSelectPlayerInfo{index}"
 								ontrigger="
-									If(param40 == 2,  
+									If(param40 == 2,
 										Split(
-											SetColor('1 0 0 1'), 
+											SetColor('1 0 0 1'),
 											SetText(Translate('game_lobby_banning'))
 										)
 									,
-										If(param40 == 9, 
+										If(param40 == 9,
 											Split(
-												SetColor('1 0.7 0 1'), 
+												SetColor('1 0.7 0 1'),
 												SetText(Translate('game_lobby_hidden_banning'))
 											)
-										, 
-											If(param40 == 10, 
+										,
+											If(param40 == 10,
 												Split(
-													SetColor('1 1 0 1'), 
+													SetColor('1 1 0 1'),
 													SetText(Translate('game_lobby_locking'))
 												)
 											,
-												If(param40 == 11, 
+												If(param40 == 11,
 													Split(
-														SetColor('0 1 0 1'), 
+														SetColor('0 1 0 1'),
 														SetText(Translate('game_lobby_shuffle_picking'))
 													)
 												,
@@ -1159,7 +1159,7 @@
 							ontriggerlua=
 							"
 								if(AtoN(param18) >= 1) then
-									if( not AtoB(param20) and GetWidget('race_result_{index}'):GetText() == '') then 
+									if( not AtoB(param20) and GetWidget('race_result_{index}'):GetText() == '') then
 										GetWidget('race_result_{index}'):SetText(GetCvarString('_raceResult') )
 										Set('_raceResult', GetCvarInt('_raceResult') + 1)
 									end
@@ -1233,7 +1233,7 @@
 											self:SetColor('1.0 1.0 1.0 1.0')
 										end
 									"
-									resourcecontext="lobby" 
+									resourcecontext="lobby"
 								/>
 
 								<panel color="white" valign="center" align="left" texture="lobby/pod_race_gear.tga" noclick="1"/>
@@ -1264,7 +1264,7 @@
 											If(param9 gt 0, SetAvatar('http://www.heroesofnewerth.com/getAvatar.php?id=' # param9))
 										);
 									"
-									resourcecontext="lobby" 
+									resourcecontext="lobby"
 								/>
 							</panel>
 
@@ -1292,11 +1292,11 @@
 											self:SetTexture('/ui/fe2/lobby/mystery.tga')
 										else
 											self:SetTexture(param6)
-										end							
+										end
 									"
 									onmouseout="HideWidget('hero_info');"
 									texture="$checker"
-									resourcecontext="lobby" 
+									resourcecontext="lobby"
 								/>
 								<panel noclick="1" watch="GamePhase" ontrigger="SetVisible(param0 lt 4);">
 									<!-- Ready Effect -->
@@ -1413,8 +1413,8 @@
 
 					</panel>
 
-					<image texture="lobby/mastery/pod_face_iron.tga" hflip="1" noclick="true" 
-						   watch="HeroSelectMastery{index}" 
+					<image texture="lobby/mastery/pod_face_iron.tga" hflip="1" noclick="true"
+						   watch="HeroSelectMastery{index}"
 						   ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/pod_face_'..param0..'.tga')" />
 
 
@@ -1445,7 +1445,7 @@
 						"
 						onmouseover="
 							ExplodeTrigger('GameLobby_NewStats', _psr_tipA{index}, '|', '::');
-							If(Trigger('GameLobby_StatsFade', _psr_tipShow{index}));
+							Trigger('GameLobby_StatsFade', _psr_tipShow{index});
 							ExplodeTrigger('GameLobby_RecentMatchTrigger', _psr_tipMatch{index});
 							ExplodeTrigger('GameLobby_FavHeroTrigger', _psr_tipHero{index});
 						"
@@ -1604,20 +1604,20 @@
 							Set('_psr_tipA{index}', '^444(^666' # Round(param22 / (param22 + param23) * 100) # '%^444) ^w' # param22 # '\\n' # param23 # '\\n' # FtoA(param25 / param27, 2) # ':1\\n' # FtoA(param26 / param27, 2) # ':1\\n' # FtoA((param25 + param26) / param27, 2) # ':1\\n' # FtoA(param31, 1) # '\\n' # FtoA(ceil(param29 * 10) / 10, 1) # '\\n' # FtoA(ceil(param30 * 10) / 10, 1) # '::' # param1 # '::' # param2 # '::' # param78  );
 							Set('_psr_tipMatch{index}', param33 # ':' # param34 # ':^g' # param35 # '^w/^r' # param36 # '^w/^y' # param37 # '|' # param38 # ':' # param39 # ':^g' # param40 # '^w/^r' # param41 # '^w/^y' # param42 # '|' # param43 # ':' # param44 # ':^g' # param45 # '^w/^r' # param46 # '^w/^y' # param47 # '|' # param48 # ':' # param49 # ':^g' # param50 # '^w/^r' # param51 # '^w/^y' # param52 # '|' # param53 # ':' # param54 # ':^g' # param55 # '^w/^r' # param56 # '^w/^y' # param57 # '|' # param58 # ':' # param59 # ':^g' # param60 # '^w/^r' # param61 # '^w/^y' # param62 # '|' # param63 # ':' # param64 # ':^g' # param65 # '^w/^r' # param66 # '^w/^y' # param67);
 							Set('_psr_tipHero{index}', param68 # ':' # param69 # ':null|' # param70 # ':' # param71 # ':null|' # param72 # ':' # param73 # ':null|' # param74 # ':' # param75 # ':null|' # param76 # ':' # param77 # ':null');
-				
+
 							If(param10 == -1,
 								SetOnMouseover(''),
 								SetOnMouseover('
 									ExplodeTrigger(\'GameLobby_NewStats\', _psr_tipA{index}, \'|\', \'::\');
-									If(Trigger(\'GameLobby_StatsFade\', _psr_tipShow{index}));
+									Trigger(\'GameLobby_StatsFade\', _psr_tipShow{index});
 									ExplodeTrigger(\'GameLobby_RecentMatchTrigger\', _psr_tipMatch{index});
-									ExplodeTrigger(\'GameLobby_FavHeroTrigger\', _psr_tipHero{index});								
+									ExplodeTrigger(\'GameLobby_FavHeroTrigger\', _psr_tipHero{index});
 								')
-							);						
+							);
 						"
 						onmouseover="
 							ExplodeTrigger('GameLobby_NewStats', _psr_tipA{index}, '|', '::');
-							If(Trigger('GameLobby_StatsFade', _psr_tipShow{index}));
+							Trigger('GameLobby_StatsFade', _psr_tipShow{index});
 							ExplodeTrigger('GameLobby_RecentMatchTrigger', _psr_tipMatch{index});
 							ExplodeTrigger('GameLobby_FavHeroTrigger', _psr_tipHero{index});
 						"
@@ -1682,11 +1682,11 @@
 			<!-- Lock Button -->
 			<instance name="lock_button_right" index="{index}" team="{team}" slot="{slot}"/>
 
-			
+
 			<!-- Add bot 3.0 RMM CanHaveBots -->
 			<panel group="glb_bot_buttons" name="glb_add_bot_{index}" x="-10.55h" y="3.8h" width="3.25h" height="6.5h" align="right" noclick="1"
 				onshowlua="
-					UIManager.GetInterface('main'):HoNGameLobbyF('PopulateBotPickList')		
+					UIManager.GetInterface('main'):HoNGameLobbyF('PopulateBotPickList')
 				"
 				watch="LobbyPlayerInfo{index}"
 				ontrigger=" If(param15 and !(_lobby_player{index}_locked), Set('_lobby_player{index}_locked',true));
@@ -1709,8 +1709,8 @@
 					<image texture="/ui/icons/botmatch.tga" noclick="1"/>
 				</panel>
 			</panel>
-			
-	
+
+
 			<panel
 				name="event_left_pod_master{index}"
 				noclick="1"
@@ -2133,7 +2133,7 @@
 			"
 		>
 
-			
+
 
 			<!-- Slot Indication -->
 			<panel 	width="30h" height="16h" x="0h" y="1h" align="left" valign="center" watch="GamePhase"   ontrigger="SetVisible(param0 gt 1 and param0 lt 4)" noclick="1" color="invisible" visible="0">
@@ -2168,18 +2168,18 @@
 				<!-- Lower Panels -->
 				<panel x="58.5@"  y="33.9%" height="50%" noclick="true">
 					<!-- Panel 2 -->
-					<image name="player_slot_panel2{index}"   x="-110.0@"  width="200@" height="100%" valign="bottom" align="left" noclick="true"					
-						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel2_iron.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures"	
+					<image name="player_slot_panel2{index}"   x="-110.0@"  width="200@" height="100%" valign="bottom" align="left" noclick="true"
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel2_iron.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures"
 						watch="HeroSelectMastery{index}"
-				  		ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel2_'..param0..'.tga')"				
+				  		ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel2_'..param0..'.tga')"
 					/>
 
 					<!-- Panel 3  -->
 					<panel name="player_slot_panel3_slide{index}" x="-160.0@" y="100%" width="400@" height="200%" noclick="true" valign="bottom" align="left" >
-						<image name="player_slot_panel3{index}" noclick="true" onload="Rotate(-90, 1);" 						
-							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel3_iron.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures"	
+						<image name="player_slot_panel3{index}" noclick="true" onload="Rotate(-90, 1);"
+							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel3_iron.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures"
 							watch="HeroSelectMastery{index}"
-				  			ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel3_'..param0..'.tga')"					
+				  			ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel3_'..param0..'.tga')"
 						/>
 					</panel>
 
@@ -2189,19 +2189,19 @@
 							<image name="player_slot_panel1{index}" x="-50.0%" noclick="true"
 							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel1_iron.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures"
 							watch="HeroSelectMastery{index}"
-				  		   	ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel1_'..param0..'.tga')"		
+				  		   	ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel1_'..param0..'.tga')"
 						/>
-						<image name="player_slot_left_door{index}" y="3%" height="-3.0%" x="-50.0%" noclick="true" 
+						<image name="player_slot_left_door{index}" y="3%" height="-3.0%" x="-50.0%" noclick="true"
 							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/near_door_iron.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures"
 							watch="HeroSelectMastery{index}"
-				  		   	ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/near_door_'..param0..'.tga')"	
+				  		   	ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/near_door_'..param0..'.tga')"
 						/>
 					</panel>
 
 					<!-- Right Door / Panel 3 Cover / Bolt  -->
 					<panel name="player_slot_panel3extras_container{index}" x="-160.0@" y="100%" width="400@" height="200%" valign="bottom" align="left" noclick="true">
 							<panel name="player_slot_right_door_slide{index}" y="2%" height="-6.0%" noclick="true" >
-							<image name="player_slot_right_door{index}" noclick="true" onload="Rotate(-90, 1);" 
+							<image name="player_slot_right_door{index}" noclick="true" onload="Rotate(-90, 1);"
 								ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/far_door_iron.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures"
 								watch="HeroSelectMastery{index}"
 				  		   		ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/far_door_'..param0..'.tga')"
@@ -2209,12 +2209,12 @@
 						</panel>
 
 
-						<image name="player_slot_panel3_cover{index}" noclick="true" onload="Rotate(-90, 1);" 
+						<image name="player_slot_panel3_cover{index}" noclick="true" onload="Rotate(-90, 1);"
 							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel3_cover_iron.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures"
 							watch="HeroSelectMastery{index}"
 				  			ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel3_cover_'..param0..'.tga')"
 						/>
-						<image name="player_slot_bolt{index}" y="-4.0%" x="0.5@" width="12.5@" height="12.5%" align="center" valign="center" noclick="true" onload="Rotate(0, 1);" 
+						<image name="player_slot_bolt{index}" y="-4.0%" x="0.5@" width="12.5@" height="12.5%" align="center" valign="center" noclick="true" onload="Rotate(0, 1);"
 							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/bolt.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures"
 						/>
 
@@ -2269,7 +2269,7 @@
 							<!-- Swap Button -->
 							<panel name="player_slot_swap_button{index}" visible="1" x="69%" y="23.4%" width="18@" height="18%" noclick="true">
 								<button
-									texture="lobby/swap_hero.tga"								
+									texture="lobby/swap_hero.tga"
 									onmouseover="PlaySound('/shared/sounds/ui/button_over_02.wav'); ShowWidget('globby_swap_hero_tip');"
 									onmouseout="HideWidget('globby_swap_hero_tip');"
 									ondisable="HideWidget('globby_swap_hero_tip'); HideWidget('globby_swap_hero_noeap_tip');"
@@ -2279,7 +2279,7 @@
 									disabledmouseout="1"
 									watch="HeroSelectPlayerInfo{index}"
 									ontrigger="If(!param1 and param8 and !param9 and param11 and !param12, SetEnabled(1), SetEnabled(0));
-										If(param29, 
+										If(param29,
 											SetOnMouseOverDisabled('PlaySound(\'/shared/sounds/ui/button_over_02.wav\'); ShowWidget(\'globby_swap_hero_noeap_tip\');'),
 											SetOnMouseOverDisabled('')
 										);
@@ -2307,7 +2307,7 @@
 						<panel width="72%" height="60%" x="-0.7h" valign="center" align="right"
 							noclick="1"
 							watch="HeroSelectPlayerInfo{index}"
-							ontrigger="SetVisible(param30 or (param14 and !param26) or (param14 and (param41 == 6) and (param40 == 2)) or (param14 and (param40 == 11)));"	
+							ontrigger="SetVisible(param30 or (param14 and !param26) or (param14 and (param41 == 6) and (param40 == 2)) or (param14 and (param40 == 11)));"
 							visible="0"
 						>
 							<panel x="-2.4%" float="right" padding="0" noclick="true">
@@ -2329,27 +2329,27 @@
 							<label x="28%" height="100%" font="dyn_10" textvalign="center" textalign="center" color="0 1 0 1" shadow="1" content="???" noclick="true"
 								watch="HeroSelectPlayerInfo{index}"
 								ontrigger="
-									If(param40 == 2,  
+									If(param40 == 2,
 										Split(
-											SetColor('1 0 0 1'), 
+											SetColor('1 0 0 1'),
 											SetText(Translate('game_lobby_banning'))
 										)
 									,
-										If(param40 == 9, 
+										If(param40 == 9,
 											Split(
-												SetColor('1 0.7 0 1'), 
+												SetColor('1 0.7 0 1'),
 												SetText(Translate('game_lobby_hidden_banning'))
 											)
-										, 
-											If(param40 == 10, 
+										,
+											If(param40 == 10,
 												Split(
-													SetColor('1 1 0 1'), 
+													SetColor('1 1 0 1'),
 													SetText(Translate('game_lobby_locking'))
 												)
 											,
-												If(param40 == 11, 
+												If(param40 == 11,
 													Split(
-														SetColor('0 1 0 1'), 
+														SetColor('0 1 0 1'),
 														SetText(Translate('game_lobby_shuffle_picking'))
 													)
 												,
@@ -2392,7 +2392,7 @@
 							ontriggerlua=
 							"
 								if(AtoN(param18) >= 1) then
-									if( not AtoB(param20) and GetWidget('race_result_{index}'):GetText() == '') then 
+									if( not AtoB(param20) and GetWidget('race_result_{index}'):GetText() == '') then
 										GetWidget('race_result_{index}'):SetText(GetCvarString('_raceResult') )
 										Set('_raceResult', GetCvarInt('_raceResult') + 1)
 									end
@@ -2464,8 +2464,8 @@
 										else
 											self:SetColor('1.0 1.0 1.0 1.0')
 										end
-									"									
-									resourcecontext="lobby" 
+									"
+									resourcecontext="lobby"
 								/>
 
 								<panel color="white" valign="center" align="right"   texture="lobby/pod_race_gear.tga" noclick="1"/>
@@ -2495,7 +2495,7 @@
 											If(param9 gt 0, SetAvatar('http://www.heroesofnewerth.com/getAvatar.php?id=' # param9))
 										);
 									"
-									resourcecontext="lobby" 
+									resourcecontext="lobby"
 								/>
 							</panel>
 
@@ -2522,11 +2522,11 @@
 											self:SetTexture('/ui/fe2/lobby/mystery.tga')
 										else
 											self:SetTexture(param6)
-										end									
-									"									
+										end
+									"
 									onmouseout="HideWidget('hero_info');"
 									texture="$checker"
-									resourcecontext="lobby" 
+									resourcecontext="lobby"
 								/>
 								<panel noclick="1" watch="GamePhase" ontrigger="SetVisible(param0 lt 4);">
 									<!-- Ready Effect -->
@@ -2633,8 +2633,8 @@
 
 					</panel>
 
-					<image texture="lobby/mastery/pod_face_iron.tga" noclick="true" 
-						   watch="HeroSelectMastery{index}" 
+					<image texture="lobby/mastery/pod_face_iron.tga" noclick="true"
+						   watch="HeroSelectMastery{index}"
 						   ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/pod_face_'..param0..'.tga')" />
 
 					<panel noclick="true" color="invisible" onload="CreateBool('_lobby_player{index}_locked', false);" />
@@ -2664,7 +2664,7 @@
 						"
 						onmouseover="
 									ExplodeTrigger('GameLobby_NewStats', _psr_tipA{index}, '|', '::');
-									If(Trigger('GameLobby_StatsFade', _psr_tipShow{index}));
+									Trigger('GameLobby_StatsFade', _psr_tipShow{index});
 									ExplodeTrigger('GameLobby_RecentMatchTrigger', _psr_tipMatch{index});
 									ExplodeTrigger('GameLobby_FavHeroTrigger', _psr_tipHero{index});
 						"
@@ -2825,15 +2825,15 @@
 								SetOnMouseover(''),
 								SetOnMouseover('
 									ExplodeTrigger(\'GameLobby_NewStats\', _psr_tipA{index}, \'|\', \'::\');
-									If(Trigger(\'GameLobby_StatsFade\', _psr_tipShow{index}));
+									Trigger(\'GameLobby_StatsFade\', _psr_tipShow{index});
 									ExplodeTrigger(\'GameLobby_RecentMatchTrigger\', _psr_tipMatch{index});
-									ExplodeTrigger(\'GameLobby_FavHeroTrigger\', _psr_tipHero{index});								
+									ExplodeTrigger(\'GameLobby_FavHeroTrigger\', _psr_tipHero{index});
 								')
 							);
 						"
 						onmouseover="
 							ExplodeTrigger('GameLobby_NewStats', _psr_tipA{index}, '|', '::');
-							If(Trigger('GameLobby_StatsFade', _psr_tipShow{index}));
+							Trigger('GameLobby_StatsFade', _psr_tipShow{index});
 							ExplodeTrigger('GameLobby_RecentMatchTrigger', _psr_tipMatch{index});
 							ExplodeTrigger('GameLobby_FavHeroTrigger', _psr_tipHero{index});
 						"
@@ -2900,7 +2900,7 @@
 
 			<!-- Lock Button -->
 			<instance name="lock_button" index="{index}" team="{team}" slot="{slot}"/>
-			
+
 			<!-- Add bot 3.0 RMM CanHaveBots -->
 			<panel group="glb_bot_buttons" name="glb_add_bot_{index}" x="10.55h" y="3.8h" width="3.25h" height="6.5h" noclick="1"
 				watch="LobbyPlayerInfo{index}"
@@ -2919,15 +2919,15 @@
 				<panel x="-0.15h" y="-0.65h" width="2.25h" height="2.25h" align="center" valign="bottom"
 					onclick="Call('glb_invite_bot', 'FadeIn(100);');"
 					onclicklua="PlaySound('/shared/sounds/ui/button_click_01.ogg') UIManager.GetInterface('main'):HoNGameLobbyF('RepickBot', self, {slot}, '{team}')"
-					ondoubleclicklua="PlaySound('/shared/sounds/ui/button_click_01.ogg') UIManager.GetInterface('main'):HoNGameLobbyF('SelectBot', self, 1)"	
+					ondoubleclicklua="PlaySound('/shared/sounds/ui/button_click_01.ogg') UIManager.GetInterface('main'):HoNGameLobbyF('SelectBot', self, 1)"
 					onshowlua="
-						UIManager.GetInterface('main'):HoNGameLobbyF('PopulateBotPickList')		
+						UIManager.GetInterface('main'):HoNGameLobbyF('PopulateBotPickList')
 					"
 				>
 					<image texture="/ui/icons/botmatch.tga" noclick="1"/>
-				</panel>		
+				</panel>
 			</panel>
-			
+
 
 			<panel
 				name="event_left_pod_master{index}"
@@ -3141,9 +3141,7 @@
 				noclick="1"
 				name="pod_stage_5_{index}"
 				onevent0="
-
 					Call('player_slot_left_door{index}', 'SlideX(\'8.0@\', 200);');
-
 					Call('player_slot_right_door_slide{index}', 'SlideX(\'-21%\', 200);');
 
 					Call('HeroSelectPlayerPSR{index}', 'FadeIn(400);');
@@ -3159,16 +3157,13 @@
 				noclick="1"
 				name="pod_stage_6_{index}"
 				onevent0="
-
 					Call('player_side_disc{index}', 'SlideX(\'-33.6@\', 200);');
-
 				"
 			/>
 			<panel
 				noclick="1"
 				name="pod_stage_7_{index}"
 				onevent0="
-
 					Call('player_side_disc_frame{index}', 'Rotate(-180, 200);');
 				"
 			/>
@@ -3180,9 +3175,7 @@
 				noclick="1"
 				name="pod_stage_7_{index}_close"
 				onevent0="
-
 					Call('player_side_disc_frame{index}', 'Rotate(0, 200);');
-
 				"
 			/>
 			<!-- Player / Single Draft Disc -->
@@ -3193,7 +3186,6 @@
 
 					Call('player_side_disc{index}', 'SlideX(0, 200);');
 					Call('hero_name_container_left{index}', 'ScaleWidth(\'15%\', 200);');
-
 				"
 			/>
 			<!-- Doors -->
@@ -3218,19 +3210,15 @@
 				"
 			/>
 
-
 			<!-- Rotate 3 Down -->
 			<panel
 				noclick="1"
 				name="pod_stage_3_{index}_close"
 				onevent0="
-
 					Call('player_slot_panel3{index}', 'Rotate(-90, 200);');
 					Call('player_slot_bolt{index}', 'Rotate(0, 200);');
 					Call('player_slot_panel3_cover{index}', 'Rotate(-90, 200);');
 					Call('player_slot_right_door{index}', 'Rotate(-90, 200);');
-
-
 				"
 			/>
 			<!-- Panel 2/3 Reveal -->
@@ -3238,7 +3226,6 @@
 				noclick="1"
 				name="pod_stage_2_{index}_close"
 				onevent0="
-
 					Call('player_slot_panel2{index}', 'SlideX(\'-110.0@\', 200);');
 					Call('player_slot_panel3_slide{index}', 'SlideX(\'-160@\', 200);');
 					Call('player_slot_panel3extras_container{index}', 'SlideX(\'-160@\', 200);');
@@ -3249,12 +3236,10 @@
 				noclick="1"
 				name="pod_stage_1_{index}_close"
 				onevent0="
-
 					Call('player_slot_panel1{index}', 'SlideX(\'-50.0%\', 100);');
 					Call('hero_name_container_left{index}', 'SetVisible(0);');
 				"
 			/>
-
 
 			<!-- ========= PLAYER PICKER TRANSFORMATION TO PICKER ========= -->
 
@@ -3262,30 +3247,25 @@
 			<panel
 				noclick="1"
 				name="pod_stage_1_{index}_picker"
-				onevent0="
-				"
+				onevent0=""
 			/>
 			<!-- Panel 2/3 Reveal -->
 			<panel
 				noclick="1"
 				name="pod_stage_2_{index}_picker"
-				onevent0="
-				"
+				onevent0=""
 			/>
 			<!-- Rotate 3 Down -->
 			<panel
 				noclick="1"
 				name="pod_stage_3_{index}_picker"
-				onevent0="
-				"
+				onevent0=""
 			/>
 			<!-- Ready Button -->
 			<panel
 				noclick="1"
 				name="pod_stage_4_{index}_picker"
-				oneventX="
-
-				"
+				oneventX=""
 			/>
 
 			<!-- Doors -->
@@ -3295,41 +3275,35 @@
 				onevent0="
 					Call('player_slot_repick_buttons{index}', 'FadeIn(300);');
 					Call('hero_name_container_left{index}', 'ScaleWidth(\'68%\', 200);');
-
-
 				"
 			/>
 
 			<panel
 				noclick="1"
 				name="pod_stage_6_{index}_picker"
-				onevent0="
-
-				"
+				onevent0=""
 			/>
 
 			<panel
 				noclick="1"
 				name="pod_stage_7_{index}_picker"
-				onevent0="
-				"
+				onevent0=""
 			/>
 		</panel>
 	</template>
 
-
 	<!-- SD Hero list -->
 	<template name="hero_icon_sd">
 		<panel noclick="1" height="{height=100%}" width="{width=100%}" align="{align=left}" valign="{valign=left}" >
-			<image 			
+			<image
 				color="white"
 				watch0="ClearHeroSelectInfo" ontrigger0="SetWatch('');" watch7="HeroSelectInfo{gameMode}"
 				ontrigger7lua="
 					if (param2 == 'sd') then
 						Game_Lobby.RegisterHeroIconSD(self, '{infotrigger=HeroSelectHeroList}', param13, {slot}, {offset})
 					end
-					"
-				resourcecontext="lobby" 
+				"
+				resourcecontext="lobby"
 				onhidelua=""
 			/>
 		</panel>
@@ -3362,9 +3336,9 @@
 								),
 								SetOnrightclick('
 									PotentialHero(\''#param0#'\');
-									cg_avatarHero = \'' # param0 # '\'; 
-								')								
-							),							
+									cg_avatarHero = \'' # param0 # '\';
+								')
+							),
 							If(param2 == -3,
 								Split(
 									SetOnclick('
@@ -3386,8 +3360,8 @@
 									'),
 									SetOnrightclick('
 										PotentialHero(\''#param0#'\');
-										cg_avatarHero = \'' # param0 # '\'; 
-									')									
+										cg_avatarHero = \'' # param0 # '\';
+									')
 								),
 								Split(
 									SetOnclick(''),
@@ -3413,12 +3387,12 @@
 					>
 						<frame x="0" color="invisible" bordercolor="1 0.74 0 0.3" borderthickness="2" visible="1" clip="1" noclick="1" >
 							<image texture="/ui/specui/shinegradient.png"  color="1 1 1 1" width="150%" height="150%" valign="center" align="center" visible="1" noclick="1"
-								onshow="SetWatch('HostTime');" onhide="SetWatch('');"  
-								watch="" ontrigger="If(GetRotation() ge 360, SetRotation(0), SetRotation(GetRotation() + 1));" 
-							/>								
-							<instance name="hero_icon_sd" gameMode="{gameMode}"  slot="{slot}" offset="{offset}" width="-4" height="-4" valign="center" align="center" />						
-							<panel texture="/ui/specui/shinegradient.png" y="100%" rotation="0" vscale="2" vspeed="-1.4" color="1 1 1 0.1" width="100%" height="400%" valign="center" align="center" noclick="1" />	
-						</frame>							
+								onshow="SetWatch('HostTime');" onhide="SetWatch('');"
+								watch="" ontrigger="If(GetRotation() ge 360, SetRotation(0), SetRotation(GetRotation() + 1));"
+							/>
+							<instance name="hero_icon_sd" gameMode="{gameMode}"  slot="{slot}" offset="{offset}" width="-4" height="-4" valign="center" align="center" />
+							<panel texture="/ui/specui/shinegradient.png" y="100%" rotation="0" vscale="2" vspeed="-1.4" color="1 1 1 0.1" width="100%" height="400%" valign="center" align="center" noclick="1" />
+						</frame>
 					</panel>
 
 					<panel noclick="1" watch0="ClearHeroSelectInfo" ontrigger0="SetWatch('');" watch7="HeroSelectInfo{gameMode}" ontrigger7="SetWatch('{infotrigger=HeroSelectHeroList}' # Round(((param13 - 1) * 15) + ({slot} * 3) + {offset}));"
@@ -3441,7 +3415,7 @@
 									)
 								);
 							"
-							resourcecontext="lobby" 
+							resourcecontext="lobby"
 						/>
 					</panel>
 
@@ -3472,7 +3446,7 @@
 								SetTexture('/ui/elements/button_bevel_sml_down.tga')
 							);
 						"
-						resourcecontext="lobby" 
+						resourcecontext="lobby"
 					/>
 				</widgetstate>
 				<widgetstate statename="down" align="center" valign="center" width="90%" height="90%"
@@ -3517,7 +3491,7 @@
 					SetOnrightclick('PlaySound(\'/ui/fe2/store/sounds/popup.wav\'); CallEventParamsX(\'altav_full\', 0, 1); cg_avatarHero = \'' # param0 # '\';');
 				"
 				watch2="GamePhaseExtended"
-				ontrigger2="If(!{showlocks=true}, SetEnabled(param0 == 10));"			
+				ontrigger2="If(!{showlocks=true}, SetEnabled(param0 == 10));"
 			>
 				<widgetstate statename="up">
 					<image texture="/ui/elements/button_bevel_sml_up.tga" color="1 1 1 1" noclick="true"/>
@@ -3531,8 +3505,8 @@
 					<image texture="/ui/elements/button_bevel_sml_up.tga" color="red" noclick="true"/>
 					<image x="1" y="1" width="74@" height="74%" align="center" valign="center" texture="/ui/icons/users.tga" />
 				</widgetstate>
-			</button>			
-			
+			</button>
+
 			<!-- Purchase / Token button -->
 			<button
 				x="-5%" y="-5%" visible="0"
@@ -3563,7 +3537,7 @@
 					');
 				"
 				watch2="GamePhaseExtended"
-				ontrigger2="If(!{showlocks=true}, SetEnabled(param0 == 10));"			
+				ontrigger2="If(!{showlocks=true}, SetEnabled(param0 == 10));"
 			>
 				<widgetstate statename="up">
 					<image texture="/ui/elements/button_bevel_sml_up.tga" color="1 1 1 1" noclick="true"/>
@@ -3574,16 +3548,16 @@
 				<widgetstate statename="down">
 					<image texture="/ui/elements/button_bevel_sml_up.tga" color="red" noclick="true"/>
 				</widgetstate>
-				<image width="74@" height="74%" align="center" valign="center" color=".8 .8 .8 1" texture="/ui/icons/goldcoin.tga" 	
+				<image width="74@" height="74%" align="center" valign="center" color=".8 .8 .8 1" texture="/ui/icons/goldcoin.tga"
 					ontriggerlua="
 						if AtoB(param37) and AtoB(param42) and AtoB(param4) and (not AtoB(param35)) and (not AtoB(param43)) then
 							self:SetTexture('/ui/fe2/store/icons/hero_token.tga')
 						else
 							self:SetTexture('/ui/icons/goldcoin.tga')
 						end
-					" 
-					watch0="ClearHeroSelectInfo" ontrigger0="SetWatch('');" watch7="HeroSelectInfo{gameMode}" ontrigger7="SetWatch('{infotrigger=HeroSelectHeroList}' # Round(((param13 - 1) * 15) + ({slot} * 3) + {offset}));" 
-				/>			
+					"
+					watch0="ClearHeroSelectInfo" ontrigger0="SetWatch('');" watch7="HeroSelectInfo{gameMode}" ontrigger7="SetWatch('{infotrigger=HeroSelectHeroList}' # Round(((param13 - 1) * 15) + ({slot} * 3) + {offset}));"
+				/>
 			</button>
 		</panel>
 
@@ -3603,7 +3577,7 @@
 				ontrigger7="SetWatch('LobbyPlayerInfo' # Round(((param13 - 1) * 5) + {slot}));"
 				ontrigger="SetColor(param2);"
 			/>
-			<panel width="121%" height="140%" valign="center" align="center" 
+			<panel width="121%" height="140%" valign="center" align="center"
 				ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/sd_bar.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures"
 			/>
 			<panel float="right" padding="4.3h">
@@ -3624,8 +3598,8 @@
 					if (param2 ~= 'sd') then
 						Game_Lobby.RegisterHeroIcon(self, '{infotrigger=HeroSelectHeroList}', {index}, {team}, {team_offset}, {group}, {group_size}, {row}, {row_size})
 					end
-					"
-				onhidelua=""			
+				"
+				onhidelua=""
 				color="white"
 				onload="
 					If({showlocks=true},
@@ -3688,7 +3662,7 @@
 						if(tonumber(param2) > 0 or param29 == 'BanHero' or AtoB(param43) or tonumber(param2) == -5) then
 							if(param29 == 'SpawnHero') then
 								if(not AtoB(param36) and not AtoB(param37)) then
-									self:SetCallback('onclick', function() self:UICmd( param29 .. '(\'' .. param0 .. '\');	cg_avatarHero = \'' .. param0 .. '\'; If(' .. tostring(not GetCvarBool('ui_lobby_localPlayerCaptain')) .. ' and (HeroSelectTimer ge 7000), CallEventParamsX(\'altav_full\', 0, 0)); PlaySound(\'/shared/sounds/ui/hero_select/button_select.wav\');') end) 
+									self:SetCallback('onclick', function() self:UICmd( param29 .. '(\'' .. param0 .. '\');	cg_avatarHero = \'' .. param0 .. '\'; If(' .. tostring(not GetCvarBool('ui_lobby_localPlayerCaptain')) .. ' and (HeroSelectTimer ge 7000), CallEventParamsX(\'altav_full\', 0, 0)); PlaySound(\'/shared/sounds/ui/hero_select/button_select.wav\');') end)
 								else
 									self:SetCallback('onclick', function() self:UICmd( param29 .. '(\'' .. param0 .. '\'); cg_avatarHero = \'' .. param0 .. '\'; PlaySound(\'/shared/sounds/ui/hero_select/button_select.wav\');') end)
 								end
@@ -3709,23 +3683,23 @@
 						self:SetCallback('onclick', function() self:UICmd('') end)
 						self:SetCallback('onrightclick', function() self:UICmd( 'PotentialHero(\''..param0..'\');') end)
 					end
-					
+
 					if(param0 ~= '') then
 						self:SetCallback('onmouseover', function() self:UICmd('ShowWidget(\'hero_info\'); GetHeroInfo(\'' .. param0 .. '\'); DoEvent(0);') end)
 					else
 						self:SetCallback('onmouseover', function() self:UICmd('') end)
 					end
-					
+
 					if(not {showlocks=true}) then
 						self:SetEnabled(GetCvarInt('ui_gamePhaseExtended') == 10 and AtoB(param4))
 					end
-					
+
 					if(not AtoB(param35)) then
 						self:SetCallback('onmouseout', function() self:UICmd('HideWidget(\'hero_info\'); DoEvent(1);') end)
 					else
 						self:SetCallback('onmouseout', function() self:UICmd('HideWidget(\'hero_info\'); DoEvent(2);') end)
 					end
-					
+
 					if(Main_Walkthrough.pregameLobbyStep == 1) then
 						if(param0 ~= 'Hero_Pyromancer') then
 							self:SetCallback('onclick', function() self:UICmd( '' ) end)
@@ -3736,14 +3710,14 @@
 							self:RefreshCallbacks()
 							local targetCallback = self:GetCallback('onclick')
 							self:SetCallback('onclick',
-								function() 					
+								function()
 									self:SetCallback('onclick',
 										function()
 											if (targetCallback) then targetCallback() end
 										end)
 									self:RefreshCallbacks()
 									if (targetCallback) then targetCallback() end
-									
+
 									Game_Lobby.TellUserToReady()
 								end
 							)
@@ -3754,52 +3728,50 @@
 				onmouseout="HideWidget('hero_info'); DoEvent(1);"
 				onevent0="
 					Call('lobby_hero_icon_border_{gameMode}_{index}_{team=-1}_{group=0}_{group_size=0}_{row=0}_{row_size=0}', '
-						SetTexture(\'/ui/elements/button_bevel_sml_over.tga\');					
+						SetTexture(\'/ui/elements/button_bevel_sml_over.tga\');
 					');
 					Call('lobby_hero_icon_{gameMode}_{index}_{team=-1}_{group=0}_{group_size=0}_{row=0}_{row_size=0}', '
 						SetWidth(\'110%\');
-						SetHeight(\'110%\');						
-					');					
+						SetHeight(\'110%\');
+					');
 				"
 				onevent1="
 					Call('lobby_hero_icon_border_{gameMode}_{index}_{team=-1}_{group=0}_{group_size=0}_{row=0}_{row_size=0}', '
-						SetTexture(\'/ui/elements/button_bevel_sml_up.tga\');					
-					');	
+						SetTexture(\'/ui/elements/button_bevel_sml_up.tga\');
+					');
 					Call('lobby_hero_icon_{gameMode}_{index}_{team=-1}_{group=0}_{group_size=0}_{row=0}_{row_size=0}', '
 						SetWidth(\'100%\');
-						SetHeight(\'100%\');						
-					');						
+						SetHeight(\'100%\');
+					');
 				"
 				onevent2="
 					Call('lobby_hero_icon_border_{gameMode}_{index}_{team=-1}_{group=0}_{group_size=0}_{row=0}_{row_size=0}', '
-						SetTexture(\'/ui/elements/button_bevel_sml_free_up.tga\');					
-					');	
+						SetTexture(\'/ui/elements/button_bevel_sml_free_up.tga\');
+					');
 					Call('lobby_hero_icon_{gameMode}_{index}_{team=-1}_{group=0}_{group_size=0}_{row=0}_{row_size=0}', '
 						SetWidth(\'100%\');
-						SetHeight(\'100%\');						
-					');						
-				"				
+						SetHeight(\'100%\');
+					');
+				"
 				onmouseldown="
 					Call('lobby_hero_icon_border_{gameMode}_{index}_{team=-1}_{group=0}_{group_size=0}_{row=0}_{row_size=0}', '
-						SetTexture(\'/ui/elements/button_bevel_sml_down.tga\');					
+						SetTexture(\'/ui/elements/button_bevel_sml_down.tga\');
 					');
 					Call('lobby_hero_icon_{gameMode}_{index}_{team=-1}_{group=0}_{group_size=0}_{row=0}_{row_size=0}', '
 						SetWidth(\'90%\');
-						SetHeight(\'90%\');						
-					');					
+						SetHeight(\'90%\');
+					');
 				"
 				onmouselup="
 					Call('lobby_hero_icon_border_{gameMode}_{index}_{team=-1}_{group=0}_{group_size=0}_{row=0}_{row_size=0}', '
-						SetTexture(\'/ui/elements/button_bevel_sml_up.tga\');						
-					');		
+						SetTexture(\'/ui/elements/button_bevel_sml_up.tga\');
+					');
 					Call('lobby_hero_icon_{gameMode}_{index}_{team=-1}_{group=0}_{group_size=0}_{row=0}_{row_size=0}', '
 						SetWidth(\'100%\');
-						SetHeight(\'100%\');						
-					');						
+						SetHeight(\'100%\');
+					');
 				"
-				
 			>
-				
 				<!-- Hero Icon -->
 				<panel name="lobby_hero_icon_{gameMode}_{index}_{team=-1}_{group=0}_{group_size=0}_{row=0}_{row_size=0}" width="100%" height="100%" noclick="1" visible="1" align="center" valign="center" >
 					<frame x="0" color="invisible" bordercolor="1 0.74 0 0.3" borderthickness="2" visible="1" clip="1" noclick="1" >
@@ -3807,11 +3779,11 @@
 							onshow="SetWatch(5, 'HostTime');" onhide="SetWatch(5, '');"
 							watch="" watch5="" ontrigger5="If(GetRotation() ge 360, SetRotation(0), SetRotation(GetRotation() + 1));"
 							watch0="ClearHeroSelectInfo" ontrigger0="SetWatch('');" watch7="HeroSelectInfo{gameMode}"
-							ontrigger7="SetWatch('{infotrigger=HeroSelectHeroList}' # Round({index} + ({team=-1} * {team_offset=0}) + ({group=0} * {group_size=0}) + ({row=0} * {row_size=0})));"							
-							ontriggerlua="self:SetVisible(AtoB(param34))"							
+							ontrigger7="SetWatch('{infotrigger=HeroSelectHeroList}' # Round({index} + ({team=-1} * {team_offset=0}) + ({group=0} * {group_size=0}) + ({row=0} * {row_size=0})));"
+							ontriggerlua="self:SetVisible(AtoB(param34))"
 						/>
 						<instance
-							name="hero_icon_normal" gameMode="{gameMode}" 
+							name="hero_icon_normal" gameMode="{gameMode}"
 							team="{team=-1}"
 							team_offset="{team_offset=0}"
 							group="{group=0}"
@@ -3824,16 +3796,16 @@
 							showlocks="{showlocks=true}"
 						/>
 
-						<panel texture="/ui/specui/shinegradient.png" y="100%" rotation="0" visible="0" vscale="2" vspeed="-1.4" color="1 1 1 0.1" width="100%" height="400%" valign="center" align="center" noclick="1" 
+						<panel texture="/ui/specui/shinegradient.png" y="100%" rotation="0" visible="0" vscale="2" vspeed="-1.4" color="1 1 1 0.1" width="100%" height="400%" valign="center" align="center" noclick="1"
 							watch0="ClearHeroSelectInfo" ontrigger0="SetWatch('');" watch7="HeroSelectInfo{gameMode}"
-							ontrigger7="SetWatch('{infotrigger=HeroSelectHeroList}' # Round({index} + ({team=-1} * {team_offset=0}) + ({group=0} * {group_size=0}) + ({row=0} * {row_size=0})));"							
-							ontriggerlua="self:SetVisible(AtoB(param34))"						
+							ontrigger7="SetWatch('{infotrigger=HeroSelectHeroList}' # Round({index} + ({team=-1} * {team_offset=0}) + ({group=0} * {group_size=0}) + ({row=0} * {row_size=0})));"
+							ontriggerlua="self:SetVisible(AtoB(param34))"
 						/>
 						<image name="lobby_hero_icon_border_{gameMode}_{index}_{team=-1}_{group=0}_{group_size=0}_{row=0}_{row_size=0}"
 							texture="/ui/elements/button_bevel_sml_up.tga"
 							color="1 1 1 1"
 							watch0="ClearHeroSelectInfo" ontrigger0="SetWatch('');" watch7="HeroSelectInfo{gameMode}"
-							ontrigger7="SetWatch('{infotrigger=HeroSelectHeroList}' # Round({index} + ({team=-1} * {team_offset=0}) + ({group=0} * {group_size=0}) + ({row=0} * {row_size=0})));"							
+							ontrigger7="SetWatch('{infotrigger=HeroSelectHeroList}' # Round({index} + ({team=-1} * {team_offset=0}) + ({group=0} * {group_size=0}) + ({row=0} * {row_size=0})));"
 							ontriggerlua="self:SetVisible(not AtoB(param34))"
 							ontrigger="
 								If(param3,
@@ -3845,12 +3817,12 @@
 										SetTexture('/ui/elements/button_bevel_sml' #If(param35 and param2 gt 0, '_free', '') # '_down.tga')
 									)
 								);
-							"							
+							"
 							resourcecontext="lobby"
-						/>						
+						/>
 					</frame>
 				</panel>
-				
+
 			</button>
 
 			<!-- If Has Alt Avs -->
@@ -3875,7 +3847,7 @@
 					SetOnrightclick('PlaySound(\'/ui/fe2/store/sounds/popup.wav\'); CallEventParamsX(\'altav_full\', 0, 1); cg_avatarHero = \'' # param0 # '\';');
 				"
 				watch2="GamePhaseExtended"
-					
+
 				ontrigger2lua=" if (AtoB('{showlocks}')) then
 									self:SetEnabled(true)
 								else
@@ -3930,7 +3902,7 @@
 									self:SetEnabled(true)
 								else
 									self:SetEnabled(param0 ~= 10 and not ViewingReplay())
-								end"			
+								end"
 			>
 				<widgetstate statename="up">
 					<image texture="/ui/elements/button_bevel_sml_up.tga" color="1 1 1 1" noclick="true"/>
@@ -3941,15 +3913,15 @@
 				<widgetstate statename="down">
 					<image texture="/ui/elements/button_bevel_sml_up.tga" color="red" noclick="true"/>
 				</widgetstate>
-				<image width="74@" height="74%" align="center" valign="center" color=".8 .8 .8 1" texture="/ui/icons/goldcoin.tga" 	
+				<image width="74@" height="74%" align="center" valign="center" color=".8 .8 .8 1" texture="/ui/icons/goldcoin.tga"
 					ontriggerlua="
 						if AtoB(param37) and AtoB(param42) and AtoB(param4) and (not AtoB(param35)) and (not AtoB(param43)) then
 							self:SetTexture('/ui/fe2/store/icons/hero_token.tga')
 						else
 							self:SetTexture('/ui/icons/goldcoin.tga')
 						end
-					" 
-					watch0="ClearHeroSelectInfo" ontrigger0="SetWatch('');" watch7="HeroSelectInfo{gameMode}" ontrigger7="SetWatch('{infotrigger=HeroSelectHeroList}' # Round({index} + ({team=0} * {team_offset=0}) + ({group=0} * {group_size=0}) + ({row=0} * {row_size=0})));" 
+					"
+					watch0="ClearHeroSelectInfo" ontrigger0="SetWatch('');" watch7="HeroSelectInfo{gameMode}" ontrigger7="SetWatch('{infotrigger=HeroSelectHeroList}' # Round({index} + ({team=0} * {team_offset=0}) + ({group=0} * {group_size=0}) + ({row=0} * {row_size=0})));"
 				/>
 			</button>
 
@@ -4043,7 +4015,7 @@
 			<!-- <instance name="hero_button_normal" gameMode="{gameMode}" team="{team}" team_offset="{team_offset}" group="{group}" group_size="{group_size}" row="{row}" row_size="{row_size}" index="8"/> -->
 		</panel>
 	</template>
-	
+
 	<template name="hero_gated_list_group_row">
 		<panel float="right" padding="0" height="{row_height}" noclick="true">
 			<instance name="hero_button_normal" gameMode="{gameMode}" team="{team}" team_offset="{team_offset}" group="{group}" group_size="{group_size}" row="{row}" row_size="{row_size}" index="0" />
@@ -4065,7 +4037,7 @@
 		<instance name="hero_full_list_group_row_v2" gameMode="{gameMode}"  team="{team}" team_offset="{team_offset}" group="{group}" group_size="{group_size}" row="2" row_size="{row_size}" row_height="{row_height=3.35h}" />
 		<!-- <instance name="hero_full_list_group_row_v2" gameMode="{gameMode}"  team="{team}" team_offset="{team_offset}" group="{group}" group_size="{group_size}" row="3" row_size="{row_size}" row_height="{row_height=3.15h}" /> -->
 	</template>
-	
+
 	<template name="hero_gated_list_group">
 		<instance name="hero_gated_list_group_row" gameMode="{gameMode}"  team="{team}" team_offset="{team_offset}" group="{group}" group_size="{group_size}" row="0" row_size="{row_size}" row_height="{row_height=5.6h}" />
 		<instance name="hero_gated_list_group_row" gameMode="{gameMode}"  team="{team}" team_offset="{team_offset}" group="{group}" group_size="{group_size}" row="1" row_size="{row_size}" row_height="{row_height=5.6h}" />
@@ -4203,7 +4175,7 @@
 			<instance name="hero_full_list_group" gameMode="{gameMode}"  team="{team}" team_offset="{team_offset}" group="2" group_size="{group_size}" row_size="{row_size}"/>
 		</panel>
 	</template>
-	
+
 	<template name="hero_gated_list">
 		<panel y="0" x="{x}" width="36%" align="{align}" float="bottom" padding="0" noclick="true">
 			<label width="100%" height="2.2h" textalign="{textalign}" textvalign="center" font="dyn_11" color="#04cc3c" content="general_hero_agi" />
@@ -4267,6 +4239,21 @@
 		</panel>
 	</template>
 
+	<template name="hero_sp_row">
+		<panel height="5.35h" float="right" padding="0.72h" noclick="true">
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="0"/>
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="1"/>
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="2"/>
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="3"/>
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="4"/>
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="5"/>
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="6"/>
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="7"/>
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="8"/>
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="9"/>
+		</panel>
+	</template>
+
 	<template name="altavatar_full_item">
 		<panel
 			sticky="true"
@@ -4302,13 +4289,13 @@
 					"
 					ontriggerlua="
 						local avatarCode = param0
-						local heroEntity = param13						
-						
+						local heroEntity = param13
+
 						if (avatarCode) and (heroEntity) then
 							self:SetVisible(AtoB(param1))
 							if AtoB(param9) then
 								if AtoB(param12) then
-									self:SetCallback('onclick', function()		
+									self:SetCallback('onclick', function()
 										if GetCvarBool('_game_lobby_setPotentialAvatar') then
 											SetPotentialHero2('' .. heroEntity .. '', '' .. avatarCode ..'')
 										else
@@ -4324,19 +4311,19 @@
 										else
 											SpawnHero('' .. heroEntity ..'')
 											SelectAvatar('' .. avatarCode ..'')
-										end								
-										GetWidget('altav_full'):DoEventN(1, 2)	
-									end)							
+										end
+										GetWidget('altav_full'):DoEventN(1, 2)
+									end)
 								end
 								self:SetCallback('onrightclick', function()
 									SetPotentialHero2('' .. heroEntity .. '', '' .. avatarCode ..'')
 									GetWidget('altav_full'):DoEventN(1, 2)
-								end)							
+								end)
 							else
-								self:SetCallback('onclick', function() 
+								self:SetCallback('onclick', function()
 									GetWidget('altav_full'):DoEventN(1, 2)
 								end)
-								self:ClearCallback('onrightclick')							
+								self:ClearCallback('onrightclick')
 							end
 							self:RefreshCallbacks()
 						else
@@ -4389,9 +4376,9 @@
 					/>
 
 					<instance
-						name="Noptions_checkbox"				
+						name="Noptions_checkbox"
 						width="92%" height="1.6h" y="-0.4h"
-						align="center" valign="bottom"					
+						align="center" valign="bottom"
 						font="dyn_10" label="general_default_avatar"
 						interactive="false"
 						checkbox_group="game_lobby_default_av_btns"
@@ -4402,8 +4389,8 @@
 						ontrigger="SetEnabled(param9);"
 						ontriggerlua="
 							local avatarCode = param0
-							local heroEntity = param13							
-							
+							local heroEntity = param13
+
 							if (avatarCode) and (heroEntity) and NotEmpty(avatarCode) and NotEmpty(heroEntity) then
 								self:SetCallback('onevent', function()
 									local db_av = GetDBEntry('def_av_'..heroEntity, 'nil', false, false, false)
@@ -4411,21 +4398,21 @@
 										self:SetButtonState(1)
 									else
 										self:SetButtonState(0)
-									end							
-								end)							
-								
+									end
+								end)
+
 								self:SetCallback('onclick', function()
 									Game_Lobby.SetDefaultHeroAvatar(heroEntity, avatarCode)
 								end)
 
 								self:RefreshCallbacks()
-								
+
 								self:DoEvent()
-								
+
 							end
 						"
-					/>					
-					
+					/>
+
 				</panel>
 
 				<!-- Icon -->
@@ -4593,7 +4580,7 @@
 						ontriggerlua="
 							local avatarCode = param0
 							local heroEntity = param13
-							
+
 							if (avatarCode) and (heroEntity) then
 								self:SetVisible(AtoB(param1))
 								self:SetEnabled(AtoB(param9))
@@ -4615,22 +4602,22 @@
 										else
 											SpawnHero('' .. heroEntity ..'')
 											SelectAvatar('' .. avatarCode ..'')
-										end								
+										end
 										GetWidget('altav_full'):DoEventN(1, 2)
-									end)							
+									end)
 								end
-								
+
 								self:SetCallback('onrightclick', function()
 									PlaySound('shared/sounds/ui/button_click_02.wav');
 									GetWidget('altav_full'):DoEventN(1, 2)
 									SetPotentialHero2('' .. heroEntity .. '', '' .. avatarCode ..'')
 								end)
-								
+
 								self:RefreshCallbacks()
 						else
 							self:SetVisible(false)
-						end							
-						"						
+						end
+						"
 					/>
 				</panel>
 
@@ -4646,8 +4633,8 @@
 			</panel>
 
 		</panel>
-	</template>	
-	
+	</template>
+
 	<template name="lp_slot">
 		<panel width="120@" height="100%" valign="center" noclick="true" >
 			<image height="100%" width="200@" align="center" noclick="true"
@@ -4657,7 +4644,7 @@
 			<instance name="hero_button_normal" gameMode="{gameMode}" height="-25%" width="-25%" x="7%" align="center" valign="center" infotrigger="LockHeroSelectHeroList" index="{index}" team="0" team_offset="0" group="0" group_size="0" row="0" row_size="0" showlocks="false" />
 		</panel>
 	</template>
-	
+
 	<!-- Quick Stats -->
 	<template name="quickstat_recent">
 		<panel height="14%" watch="GameLobby_RecentMatchTrigger" ontrigger="if(param0 == {ID}, if(StringEmpty(param1), HideWidget(), ShowWidget()));" >
@@ -4853,7 +4840,6 @@
 
 	<!-- Main Panel   0 -->
 	<template name="game_lobby_fe2">
-
 		<panel
 			name="event_gamemodes" noclick="1"
 			watch="GamePhase"
@@ -4875,7 +4861,7 @@
 				if(param0() == 5, DoEvent(5));
 				if(param0() gt 5, DoEvent(6));
 			"
-			
+
 			onevent0lua="Game_Lobby.resetGamePhase = true"
 
 			onevent0="
@@ -4896,7 +4882,7 @@
 				if(_loggedin, CallEvent('toggle_latch', 1));
 
 				Set('_raceResult',1);
-				
+
 				CallEventParamsX('altav_full', 2, 2);
 			"
 
@@ -4999,14 +4985,14 @@
 
 		<panel  name="lobby_main_panel"  y="-110h" watch="GamePhase" ontrigger="SetVisible(param0 gt 0 and param0 lt 5);">
 
-			<panel  noclick="true" >
+			<panel noclick="true" >
 				<image y="-2h" x="-54.1h" align="center"  height="95.5h"  width="50@"
 					resourcecontext="lobby" watch9="MainRegisterTextures"
-					ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker_post.tga', 'lobby', self)" 					
+					ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker_post.tga', 'lobby', self)"
 				/>
 				<image texture="lobby/hero_picker_post.tga" y="-2h" x="54.1h" align="center"  height="95.5h"  width="50@"
 					resourcecontext="lobby" watch9="MainRegisterTextures"
-					ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker_post.tga', 'lobby', self)" 					
+					ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker_post.tga', 'lobby', self)"
 				/>
 				<!-- Left -->
 				<panel width="30.7h" align="center" x="-47.1h" noclick="true">
@@ -5040,13 +5026,13 @@
 					<!-- logo -->
 					<panel watch="LobbyTeamInfo0" ontrigger="SetVisible(param2 == 0); SetTexture('/ui/fe2/mainmenu/logo.tga');" name="main_logo_gamelobby" x="-.15h" y="-2h" height="28.5h" width="28.5h"  align="center"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
-						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/mainmenu/logo.tga', 'lobby', self)" 			
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/mainmenu/logo.tga', 'lobby', self)"
 						texture="$invis"
 					/>
 
 					<panel 	watch="LobbyTeamInfo0" ontrigger="SetVisible(param2 gt 0); "  name="spectator_list"  align="center" y="-27h" valign="bottom" width="77%" height="37.50@" noclick="1"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
-						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/spectator_panel.tga', 'lobby', self)" 					
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/spectator_panel.tga', 'lobby', self)"
 					>
 						<panel color="invisible" y="-8%" width="70%"  height="60%" valign="bottom" align="center" >
 
@@ -5189,9 +5175,9 @@
 
 					</panel>
 
-					<image align="center" y="0.3h" valign="bottom" width="174%" height="87@" noclick="1" 
+					<image align="center" y="0.3h" valign="bottom" width="174%" height="87@" noclick="1"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
-						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/game_info.tga', 'lobby', self)" 					
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/game_info.tga', 'lobby', self)"
 					/>
 					<panel name="game_lobby_fe2_matchinfo_stats" y="-16.0%" x="0.0h" width="60%" height="30%" valign="bottom" align="center" color="invisible" float="bottom" padding="-0.0h" noclick="1" visible="1" watch="GameLobby_StatsFade" ontrigger="If(param, FadeOut(300), FadeIn(300));">
 						<panel height="12%" noclick="1">
@@ -5324,7 +5310,6 @@
 							<!-- Favorites -->
 						</panel>
 					</panel>
-
 
 					<!-- Player Stats EX NEW floater -->
 					<panel watch1="GamePhase" ontrigger1="if(param0 gt 1, set('QuickStats_Fade', 1), split(set('QuickStats_Fade', 0), HideWidget()));" onload="ForceToFront(); createbool('QuickStats_Fade', 0);"
@@ -5523,18 +5508,18 @@
 					/>
 					<!-- this button will always exist on this screen, so attaching the sound here -->
 				</panel>
-				
+
 				<!-- Invite Bot -->
 				<panel name="glb_invite_bot" width="42h" height="22.8h" y="-0.8h" align="center" valign="bottom" noclick="true" visible="0"
 					watch="GamePhase" ontriggerlua="UIManager.GetInterface('main'):HoNGameLobbyF('GamePhase', param0)"
 					watch2="LobbyGameInfo" ontrigger2lua="UIManager.GetInterface('main'):HoNGameLobbyF('GameInfo', param13, param12)">
 					<frame texture="/ui/frames/rounded_bg_solid.tga" borderthickness="0.6h" color="0 0 0 1" />
-					<frame texture="/ui/frames/roundframe.tga" color="#183042" borderthickness="0.6h" />										
+					<frame texture="/ui/frames/roundframe.tga" color="#183042" borderthickness="0.6h" />
 
 					<panel y="0.7h" width="-1.4h" height="2.2h" align="center" noclick="true">
 						<label name="glb_title" height="100%" font="dyn_14" color="#ffaa00" content="mm3_coop_invitebot" />
 						<label name="glb_heroname" height="100%" visible="0" font="dyn_14" color="#ffaa00" content="Hero Name" />
-						
+
 						<instance name="button2" button_name="buttonToggleBotDifficultyVis"
 							width="12.6h" height="2.2h"
 							valign="center" align="right"
@@ -5549,13 +5534,13 @@
 											GetWidget('glb_add_bot_close'):SetVisible(0)
 											GetWidget('glb_add_botdiff_close'):SetVisible(1)
 										end"
-						/>						
+						/>
 						<instance name="closex_btn" id="glb_add_bot_close" align="right" valign="center" onclick="Call('glb_invite_bot', 'FadeOut(100)');" />
 						<instance name="closex_btn" visible="false" id="glb_add_botdiff_close" align="right" valign="center" onclicklua="GetWidget('glb_bot_difficulty'):FadeOut(150)
 											GetWidget('glb_add_bot_close'):SetVisible(1)
 											GetWidget('glb_add_botdiff_close'):SetVisible(0)" />
 					</panel>
-					
+
 					<panel name="glb_botpicker_left" y="2.9h" width="-1.4h" height="-4.0h" align="center" padding="1.0h"  noclick="true">
 						<panel height="6.0h" visible="1" align="center" clip="1">
 							<label y="0.3h" name="glb_generic" wrap="true" font="dyn_12" color="1 1 1 1" content="mm3_coop_repickbot_desc" />
@@ -5595,7 +5580,7 @@
 												SetBotDifficulty(self:GetValue())"
 							/>
 						</panel>
-																
+
 						<!-- left side bot hero icons -->
 						<panel y="7.0h" width="95%" height="-7.0h" align="center">
 							<panel height="5.6h" float="right" padding="0.5h" sticky="1" stickytoinvis="0">
@@ -5620,11 +5605,11 @@
 								width="1.8h"
 								scrollbarsize="1.7h"
 								handlewidth="1.7h"
-								handleheight="1.7h"							
+								handleheight="1.7h"
 								texture="/ui/info/combobox.tga"
 								scrollbarplaceholder="true"
 								minvalue="0"
-								maxvalue="1"							
+								maxvalue="1"
 								step="1"
 								value="0"
 								vertical="true"
@@ -5638,24 +5623,24 @@
 								onmousewheeldown="Call('glb_bot_scrollbar', 'DoEvent(1);');"
 							/>
 						</panel>
-					</panel>							
+					</panel>
 				</panel>
 
 				<!-- Repick - Multibot panel -->
 				<panel name="public_games_repick_multibot" width="42h" height="22.8h" y="-0.8h" align="center" valign="bottom" noclick="true" visible="0">
 					<frame texture="/ui/frames/rounded_bg_solid.tga" borderthickness="0.6h" color="0 0 0 1" />
-					<frame texture="/ui/frames/roundframe.tga" color="#183042" borderthickness="0.6h" />										
+					<frame texture="/ui/frames/roundframe.tga" color="#183042" borderthickness="0.6h" />
 
 					<panel y="0.7h" width="-1.4h" height="2.2h" align="center" noclick="true">
 						<label name="glb_mp_hero" height="100%" font="dyn_14" color="#ffaa00" content="mm3_coop_repickbot_title" />
 						<instance name="closex_btn" align="right" valign="center" onclick="Call('public_games_repick_multibot', 'FadeOut(100)'); HideWidget('hero_info');" />
 					</panel>
-					
+
 					<panel name="glb_multibotpicker" y="2.9h" width="-1.4h" height="-4.0h" align="center" float="bottom" padding="1.0h"  noclick="true">
 						<panel height="3.0h" visible="1" align="center" clip="1">
 							<label y="0.3h" wrap="true" font="dyn_12" color="1 1 1 1" content="mm3_coop_multiplebots_pick" />
 						</panel>
-																
+
 						<!-- left side bot list -->
 						<panel grow="1" width="100%" noclick="1">
 							<panel width="-1.6h" float="bottom" name="glb_multibotlist_left">
@@ -5670,11 +5655,11 @@
 								width="1.5h"
 								scrollbarsize="1.4h"
 								handlewidth="1.4h"
-								handleheight="1.4h"							
+								handleheight="1.4h"
 								texture="/ui/info/combobox.tga"
 								scrollbarplaceholder="true"
 								minvalue="0"
-								maxvalue="1"							
+								maxvalue="1"
 								step="1"
 								value="0"
 								vertical="true"
@@ -5688,7 +5673,7 @@
 								onmousewheeldown="Call('glb_multibot_scrollbar', 'DoEvent(1);');"
 							/>
 						</panel>
-					</panel>							
+					</panel>
 				</panel>
 					
 				<panel name="referee_control" visible="0" y="6h" width="62h" height="40h" valign="top" align="center"
@@ -5702,8 +5687,8 @@
 					</panel>
 					<instance name="closex_btn" id="bt_close_referee" align="right" valign="top" onclick="Call('referee_control', 'FadeOut(100)');" />
 				</panel>
-			</panel>
 
+			</panel>
 
 			<panel watch="GamePhase" ontrigger="setVisible(param0 gt 1);" noclick="1">
 				<!-- Hero list -->
@@ -5738,10 +5723,10 @@
 					</panel>
 					<panel visible="0" y="-0.31%" width="234@" height="117%" align="center" valign="center" noclick="1" color="white"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
-						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker.tga', 'lobby', self)" 
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker.tga', 'lobby', self)"
 						group="lobby_hero_picker_parents"
 					/>
-					
+
 					<!-- FP mode  -->
 					<panel
 						visible="0"
@@ -5761,10 +5746,10 @@
 					</panel>
 					<panel visible="0" y="-0.31%" width="234@" height="117%" align="center" valign="center" noclick="1" color="white"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
-						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker.tga', 'lobby', self)" 
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker.tga', 'lobby', self)"
 						group="lobby_hero_picker_parents"
 					/>
-					
+
 					<!-- Normal mode, "all heroes" disabled  -->
 					<panel
 						visible="0"
@@ -5780,7 +5765,7 @@
 							<instance name="hero_half_list_group"  gameMode="normal" team="-1" group="2" team_offset="0" group_size="15" row_size="8" />
 						</panel>
 					</panel>
-					
+
 					<!-- BD -->
 					<panel
 						visible="0"
@@ -5790,7 +5775,6 @@
 						width="78%"
 						group="lobby_hero_picker_parents"
 					>
-						
 						<image ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/attribute_separator_bar.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures" y="25.4%" width="121%" height="12.5@" align="center"/>
 						<image ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/attribute_separator_bar.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures" y="58.2%" width="121%" height="12.5@" align="center"/>
 
@@ -5808,11 +5792,11 @@
 					</panel>
 					<panel name="banning_draft_list_bg" visible="0" y="-0.31%" width="234@" height="117%" align="center" valign="center" noclick="1" color="white"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
-						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker.tga', 'lobby', self)" 		
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker.tga', 'lobby', self)"
 						group="lobby_hero_picker_parents"
 					/>
-					
-					<!-- SD Hero List  -->
+
+					<!-- SD -->
 					<panel
 						name="sd_list"
 						visible="0"
@@ -5829,8 +5813,8 @@
 					</panel>
 					<panel name="sd_list_bg" visible="0" y="-0.31%" width="234@" height="117%" align="center" valign="center" noclick="1" color="white"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
-						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker.tga', 'lobby', self)" 		
-						group="lobby_hero_picker_parents"						
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker.tga', 'lobby', self)"
+						group="lobby_hero_picker_parents"
 					/>
 
 					<!-- Full Hero List, used by ar  -->
@@ -5841,24 +5825,24 @@
 					>
 						<image width="23%" height="116%" y="-9%" align="center"
 							resourcecontext="lobby" watch9="MainRegisterTextures"
-							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/center_post_skinny.tga', 'lobby', self)" 						
+							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/center_post_skinny.tga', 'lobby', self)"
 						/>
 						<instance name="hero_full_list" gameMode="ar"  x="0.8h" team="0" team_offset="24" group_size="48" row_size="8" textalign="left" />
 						<instance name="hero_full_list" gameMode="ar"  x="32.1h" team="1" team_offset="24" group_size="48" row_size="8" textalign="right" />
 					</panel>
-					
+
 					<!-- Full Hero List with filter, used by AP/LP  -->
 					<panel
 						visible="0"
 						name="ap_list"
 						group="lobby_hero_picker_parents"
-						
+
 					>
 						<image x="0.1h" width="23%" height="102%" y="3%" align="center"
 							resourcecontext="lobby" watch9="MainRegisterTextures"
 							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/center_post_skinny.tga', 'lobby', self)"
 						/>
-						
+
 						<!-- black covers for things -->
 						<!-- blank bar in header -->
 						<panel height="10" width="100%" y="0" color="0 0 0 1" noclick="1" />
@@ -5866,7 +5850,7 @@
 						<image texture="/ui/fe2/lobby/filter_corner_block.tga" color="0 0 0 1" width="6.8h" height="7.2h" x="-6.3 h" />
 						<image texture="/ui/fe2/lobby/filter_corner_block.tga" color="0 0 0 1" hflip="true" align="right" width="6.9h" height="7.2h" x="6.6h" />
 						<!--						-->
-						
+
 						<!-- Tooltip Trigger -->
 						<button width="2.3h" height="2.3h" color="invisible" valign="top" align="left" y="0.60h" x="-2.3h"
 							onmouseoverlua="Game_Lobby:FilterTooltip('filters_tip_title', 'filters_tip_body')"
@@ -5879,7 +5863,7 @@
 								<image width="100%" height="100%" valign="center" align="center" texture="/ui/elements/tip_mark_over.tga" />
 							</widgetstate>
 						</button>
-						
+
 						<!-- reset -->
 						<button name="pick_filter_reset" width="2.3h" height="2.3h" color="invisible" align="right" y="0.6h" x="2.8h"
 							onclicklua="Game_Lobby:ResetFilters()"
@@ -5901,10 +5885,10 @@
 						<panel x="0.6h" y="0.6h" float="right" padding="0.3h" noclick="1">
 							<instance name="pick_filter_category_radio" category="melee" disableCategories="ranged" />
 							<panel width="0.25h"></panel>
-							<instance name="pick_filter_category" category="solo"  />						
+							<instance name="pick_filter_category" category="solo"  />
 							<instance name="pick_filter_category" category="carry" />
 							<instance name="pick_filter_category" category="support" />
-							
+
 							<!-- search bar -->
 							<panel width="15.2h" height="2.1h" noclick="1">
 								<panel y="1" x="1" noclick="1">
@@ -5918,7 +5902,7 @@
 								</panel>
 								<panel watch="ViewingStreaming" ontriggerlua="self:SetVisible(AtoB(param))"/>
 							</panel>
-							
+
 						</panel>
 
 						<panel x="0.6h" y="2.9h" float="right" padding="0.3h" noclick="1">
@@ -5954,7 +5938,7 @@
 									<frame texture="/ui/frames/roundframe.tga" color="0 0 0 1" borderthickness="0.5h" blockinput="false" noclick="true"/>
 									<image width="110@" height="110%" valign="center" align="center" texture="/ui/fe2/lobby/filter_favorites.tga" noclick="1" color="yellow"/>
 								</widgetstate>
- 
+
 								<widgetstate statename="up2">
 									<frame texture="/ui/frames/rounded_bg_flat.tga" color="#192B35" borderthickness="0.5h" blockinput="false" noclick="true"/>
 									<frame texture="/ui/frames/roundframe.tga" color="0 0 0 1" borderthickness="0.5h" blockinput="false" noclick="true"/>
@@ -5972,7 +5956,6 @@
 								</widgetstate>
 							</button>
 						</panel>
-
 						<!-- end of filter section -->
 
 						<!-- heroes -->
@@ -5985,28 +5968,8 @@
 							<instance name="hero_full_list_compact" gameMode="ap" x="32.1h" team="1" team_offset="24" group_size="48" row_size="8" textalign="right" othertextalign="left" teamlabel="general_hellbourne" labelx="-0.8h" hflip="1" otherlabelx="0.5h" />
 						</if>
 						<!-- end of heroes -->
-
-						<!-- slider for controlling threshold (needs to sit over agility labels) -->
-						<!-- not a thing (right now) *insert jepoardy losing sound here* -->
-						<!-- <panel y="6.0h" width="15.0h" height="1.7h" color="invisible" align="center">
-							<frame texture="/ui/frames/rounded_bg_flat.tga" color="#192B35" borderthickness="0.5h" blockinput="false" noclick="true"/>
-							<frame texture="/ui/frames/roundframe.tga" color="0 0 0 1" borderthickness="0.5h" blockinput="false" noclick="true"/>
-							<slider name="picker_filter_threshold"
-								valign="center" align="center"
-								slotwidth="-1h" slotheight="0.6h"
-								slotcolor="#51647b"
-								handlewidth="90@" handleheight="90%"
-								handlecolor="1 1 1 1"
-								texture="/ui/info/slider.tga"
-								step="1.0"
-								value="1.0"
-								minvalue="1.0" maxvalue="5.0"
-								onchangelua="Game_Lobby:ChangeFilterThreshold(self:GetValue())"
-								onenddraglua="Game_Lobby:SetFilterThreshold()"
-							/>
-						</panel> -->
 					</panel>
-					
+
 					<!-- Full Hero List, used by banning pick  -->
 					<panel
 						visible="0"
@@ -6015,12 +5978,12 @@
 					>
 						<image width="23%" height="116%" y="-9%" align="center"
 							resourcecontext="lobby" watch9="MainRegisterTextures"
-							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/center_post_skinny.tga', 'lobby', self)" 						
+							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/center_post_skinny.tga', 'lobby', self)"
 						/>
 						<instance name="hero_full_list" gameMode="bp"  x="0.8h" team="0" team_offset="24" group_size="48" row_size="8" textalign="left" />
 						<instance name="hero_full_list" gameMode="bp"  x="32.1h" team="1" team_offset="24" group_size="48" row_size="8" textalign="right" />
 					</panel>
-					
+
 					<!-- Locking Pick List - Compact full hero list with locking slots at top
 						- Currently has 6 slots instanced. 'lp_slot_container' has a set width in order to center those 6. If the slots change, it will need to grow, or some solution that Ben approves of.
 					-->
@@ -6034,14 +5997,14 @@
 							<!-- Color indicator, SetColor to the user that is currently picking lock -->
 							<image name="lp_bar_color" noclick="true" color="#0042ff"
 								resourcecontext="lobby" watch9="MainRegisterTextures"
-								ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/lp_bar_color.tga', 'lobby', self)" 	
-							/>							
+								ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/lp_bar_color.tga', 'lobby', self)"
+							/>
 							<image noclick="true"
 								resourcecontext="lobby" watch9="MainRegisterTextures"
-								ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/lp_bar.tga', 'lobby', self)" 	
+								ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/lp_bar.tga', 'lobby', self)"
 							/>
-							
-							<panel name="lp_slot_container" width="91%" float="right" padding="0" align="center" noclick="true">							
+
+							<panel name="lp_slot_container" width="91%" float="right" padding="0" align="center" noclick="true">
 								<instance name="lp_slot" gameMode="lp"  index="0" />
 								<instance name="lp_slot" gameMode="lp" index="1" />
 								<instance name="lp_slot" gameMode="lp" index="2" />
@@ -6049,61 +6012,95 @@
 								<instance name="lp_slot" gameMode="lp" index="4" />
 								<instance name="lp_slot" gameMode="lp" index="5" />
 							</panel>
-							
+
 						</panel>
 						<instance name="hero_full_list_micro" gameMode="lp" x="0.8h" team="0" team_offset="24" group_size="48" row_size="8" textalign="left" />
 						<instance name="hero_full_list_micro" gameMode="lp" x="31.5h" team="1" team_offset="24" group_size="48" row_size="8" textalign="right" />
 					</panel>
-					
+
 					<!-- Gated Mode List -->
 					<panel
 						visible="0"
 						name="gated_list"
 						color="0 0 0 1"
 						group="lobby_hero_picker_parents"
-					>						
+					>
 						<image y="5.2%" width="20%" height="102%" align="center"
 							resourcecontext="lobby" watch9="MainRegisterTextures"
-							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/center_post.tga', 'lobby', self)" 						
-						/>						
-						<panel width="100%" height="12.5@" y="0.1h" align="center" noclick="true">					
+							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/center_post.tga', 'lobby', self)"
+						/>
+						<panel width="100%" height="12.5@" y="0.1h" align="center" noclick="true">
 							<image noclick="true"
 								resourcecontext="lobby" watch9="MainRegisterTextures"
-								ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/lp_bar.tga', 'lobby', self)" 	
+								ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/lp_bar.tga', 'lobby', self)"
 							/>
 							<image noclick="true" align="center"
 								resourcecontext="lobby" watch9="MainRegisterTextures"
-								ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/gated_title.tga', 'lobby', self)" 	
+								ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/gated_title.tga', 'lobby', self)"
 							/>
 							<panel y="-1%" width="50%" height="50%" align="center" valign="center" noclick="true">
 								<label height="50%" valign="top" textvalign="center" textalign="center" font="dyn_16" color="#ffd600" outline="true" content="general_mode_gated" nolcick="true" />
 								<label height="50%" valign="bottom" textvalign="center" textalign="center" font="dyn_12" color=".8 .8 .8 1" outline="true" content="game_lobby_gated_tagline" nolcick="true" />
-							</panel>						
+							</panel>
 						</panel>
-						<panel width="100%" height="-12.0@" valign="bottom" noclick="true">						
+						<panel width="100%" height="-12.0@" valign="bottom" noclick="true">
 							<instance name="hero_gated_list" gameMode="gt" y="0" x="4.0h" team="0" team_offset="8" group_size="16" row_size="4" align="left" textalign="left" />
 							<instance name="hero_gated_list" gameMode="gt" y="0" x="-4.0h" team="1" team_offset="8" group_size="16" row_size="4" align="right" textalign="right" />
-						</panel>						
+						</panel>
 					</panel>
 
+					<!-- SP -->
+					<panel
+						visible="0"
+						name="sp_list"
+						color="invisible"
+						x="0h"
+						y="1.35h"
+						group="lobby_hero_picker_parents"
+					>
+						
+						<!-- search bar -->
+						<panel x="45.8h" y="0h" width="15.2h" height="2.1h" noclick="1">
+							<panel y="1" x="1" noclick="1">
+								<frame texture="/ui/frames/roundframe.tga" borderthickness="0.4h" color=".4 .4 .4 1" noclick="true" />
+								<textbox name="picker_filter_textbox" color="invisible" width="-0.5h" x="0.1h" y="1" height="-0.2h" valign="center" align="center" font="dyn_10" textcolor=".8 .8 .8 1"
+									onchangelua="Game_Lobby:UpdateFilterSearchString(self:GetValue())"
+									onlosefocuslua="if (self:GetValue() == '') then self:SetInputLine(Translate('filter_search_empty')) end"
+									onfocuslua="if (self:GetValue() == Translate('filter_search_empty')) then self:SetInputLine('') end"
+									onshowlua="if (self:GetValue() == '') then self:SetInputLine(Translate('filter_search_empty')) end"
+								/>
+							</panel>
+							<panel watch="ViewingStreaming" ontriggerlua="self:SetVisible(AtoB(param))"/>
+						</panel>
+						
+						<image y="10h" width="94.8h" height="94.8h" align="center" valign="center" noclick="true"
+							resourcecontext="lobby" watch9="MainRegisterTextures"
+							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker_sp.tga', 'lobby', self)"
+						/>
+						<panel x="1.0h" y="3.6h" color="invisible" float="bottom" padding="0.75h" visible="1" noclick="true">
+							<instance name="hero_sp_row" gameMode="sp" row="0"/>
+							<instance name="hero_sp_row" gameMode="sp" row="1"/>
+							<instance name="hero_sp_row" gameMode="sp" row="2"/>
+						</panel>
+					</panel>
 
 					<panel name="hero_picker_outline" y="-0.31%" width="234@" height="117%" align="center" valign="center" noclick="1" color="white" visible="0"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
-						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker_larger.tga', 'lobby', self)" 					
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker_larger.tga', 'lobby', self)"
 					/>
 
 					<panel name="hero_picker_outline_filter" y="-0.31%" width="234@" height="117%" align="center" valign="center" noclick="1" color="white" visible="0"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
-						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker_larger_filter.tga', 'lobby', self)" 					
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker_larger_filter.tga', 'lobby', self)"
 					/>
-					
+
 					<panel name="game_lobby_blocker" y="0.0h" noclick="0" visible="0" width="100%" height="100%" color="0 0 0 .7" onload="CreateBool('ui_game_lobby_store_active', false);" onclick="Set('ui_game_lobby_store_active', false); SetVisible(false);" watch="MicroStoreStatus" ontrigger="SetVisible(param0 == 1 and ui_game_lobby_store_active);" >
 						<panel noclick="1" y="2h" >
 							<label width="-10.0h" y="4h" height="100%" align="center" textalign="center" textvalign="center" wrap="1" font="dyn_10" color="white" shadow="1" content="mstore_processing_elipses" noclick="1" />
-							<animatedimage width="4.5h" height="4.5h" texture="/ui/elements/throb/throb.tga" noclick="1" loop="1" fps="30" onshow="StartAnim(1);" visible="1" align="center" valign="center" />						
+							<animatedimage width="4.5h" height="4.5h" texture="/ui/elements/throb/throb.tga" noclick="1" loop="1" fps="30" onshow="StartAnim(1);" visible="1" align="center" valign="center" />
 						</panel>
-					</panel>										
-					
+					</panel>
+
 					<!-- Alt Avatar Display - Full -->
 					<panel
 						name="altav_full"
@@ -6150,14 +6147,14 @@
 							CreateInt('_globby_buyavatar_SilverCost', 0);
 							CreateBool('_globby_buyavatar_premium', false);
 							CreateString('_globby_buyavatar_discount', '');
-							
+
 							CreateString('_globby_buyeap_heroname', '');
 							CreateString('_globby_buyeap_avatarcode', '');
 							CreateString('_globby_buyeap_avatarname', '');
 							CreateString('_globby_buyeap_productID', '');
 							CreateInt('_globby_buyeap_cost', 0);
 							CreateInt('_globby_buyeap_SilverCost', 0);
-							CreateBool('_globby_buyeap_premium', false);								
+							CreateBool('_globby_buyeap_premium', false);
 						"
 					>
 						<!-- Store Title -->
@@ -6251,108 +6248,108 @@
 							<instance name="altavatar_full_item" slot="3" PurchaseAv="true" />
 							<instance name="altavatar_full_item" slot="4" PurchaseAv="true" />
 							<instance name="altavatar_full_item" slot="5" PurchaseAv="true" />
-						</panel>					
-					
+						</panel>
+
 					</panel>
 					<!-- / Alt Avatar Display - Full -->
-					
+
 					<!-- Avatar Cardception -->
-					<panel name="game_lobby_card_parent" noclick="0" oneventlua="Game_Lobby:DisplayCardception()" y="0" visible="0" blockinput="1">						
-						
-						<panel name="game_lobby_card_background_2" noclick="0" width="100w" align="center" visible="1" color="0 0 0 0.85"  
+					<panel name="game_lobby_card_parent" noclick="0" oneventlua="Game_Lobby:DisplayCardception()" y="0" visible="0" blockinput="1">
+
+						<panel name="game_lobby_card_background_2" noclick="0" width="100w" align="center" visible="1" color="0 0 0 0.85"
 							blockinput="1" processonlyscroll="1"
 							onmousewheeldownlua="Game_Lobby:NextViewedCard()"
-							onmousewheeluplua="Game_Lobby:PrevViewedCard()"		
+							onmousewheeluplua="Game_Lobby:PrevViewedCard()"
 							onrightclicklua="Game_Lobby:HideCardception()"
-						/>							
-						
-						<panel name="game_lobby_card_background" noclick="0" color="0 0 0 0.7" visible="1" 
+						/>
+
+						<panel name="game_lobby_card_background" noclick="0" color="0 0 0 0.7" visible="1"
 							blockinput="1"
 							onmousewheeldownlua="Game_Lobby:NextViewedCard()"
-							onmousewheeluplua="Game_Lobby:PrevViewedCard()"	
-							onrightclicklua="Game_Lobby:HideCardception()"	
+							onmousewheeluplua="Game_Lobby:PrevViewedCard()"
+							onrightclicklua="Game_Lobby:HideCardception()"
 							onmouseover="##GroupCall('game_lobby_card_quit_frames', 'DoEvent(0)');##"
-							onmouseout="##GroupCall('game_lobby_card_quit_frames', 'DoEvent(1)');##"				
-						/>							
-						
+							onmouseout="##GroupCall('game_lobby_card_quit_frames', 'DoEvent(1)');##"
+						/>
+
 						<panel name="game_lobby_card_spawn_target" noclick="1" y="-26h" visible="1" >
-							
+
 							<panel valign="center" align="left" width="34.0h" height="100%" x="0" y="0" noclick="0" color="1 0 0 0.0"
 								onrightclicklua="Game_Lobby:HideCardception()"
 								onmousewheeldownlua="Game_Lobby:NextViewedCard()"
-								onmousewheeluplua="Game_Lobby:PrevViewedCard()"	
-								onmouseover="PlaySound('/shared/sounds/ui/button_over_01.wav');"		
-							/>		
-							
+								onmousewheeluplua="Game_Lobby:PrevViewedCard()"
+								onmouseover="PlaySound('/shared/sounds/ui/button_over_01.wav');"
+							/>
+
 							<panel valign="center" align="right" width="-34.0h" height="100%" x="0" y="0" noclick="0" color="0 1 0 0.0"
 								onrightclicklua="Game_Lobby:HideCardception()"
 								onmousewheeldownlua="Game_Lobby:NextViewedCard()"
 								onmousewheeluplua="Game_Lobby:PrevViewedCard()"
-								onmouseover="PlaySound('/shared/sounds/ui/button_over_01.wav');"			
+								onmouseover="PlaySound('/shared/sounds/ui/button_over_01.wav');"
 							/>
 
 
 							<!-- Top Center Header -->
-							<panel name="game_lobby_card_avatar_top_parent" y="0.8h" grow="0" width="20h" height="7.0h" align="center" valign="top" noclick="true">			
+							<panel name="game_lobby_card_avatar_top_parent" y="0.8h" grow="0" width="20h" height="7.0h" align="center" valign="top" noclick="true">
 								<frame name="game_lobby_card_avatar_top_border_1" texture="/ui/frames/rounded_bg_white.tga" borderthickness="0.6h" color=".1 .1 .1 .6" blockinput="false" noclick="true"/>
 								<frame name="game_lobby_card_avatar_top_border_2" texture="/ui/frames/roundframe.tga" color="1 1 1 .4" borderthickness="0.6h" blockinput="false" noclick="true"/>
 								<!-- Premium Indication -->
 								<panel name="game_lobby_card_avatar_top_border_3" blockinput="false" noclick="true" visible="0" >
 									<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0.6h" color="#ff950b42" blockinput="false" noclick="true"/>
-									<frame texture="/ui/frames/roundframe.tga" color="#ffd200" borderthickness="0.6h" blockinput="false" noclick="true"/>									
+									<frame texture="/ui/frames/roundframe.tga" color="#ffd200" borderthickness="0.6h" blockinput="false" noclick="true"/>
 									<image x="-0.6h" y="0.5h" width="3.0h" height="3.0h" rotation="180" align="left" valign="bottom" texture="/ui/fe2/store/avatars_display/premium_corner_trim.tga" blockinput="false" noclick="true" />
-									<image x="0.6h" y="0.5h" width="3.0h" height="3.0h" rotation="90" align="right" valign="bottom" texture="/ui/fe2/store/avatars_display/premium_corner_trim.tga" blockinput="false" noclick="true" />																	
+									<image x="0.6h" y="0.5h" width="3.0h" height="3.0h" rotation="90" align="right" valign="bottom" texture="/ui/fe2/store/avatars_display/premium_corner_trim.tga" blockinput="false" noclick="true" />
 								</panel>
-								
+
 								<!-- New Indication -->
 								<panel name="game_lobby_card_avatar_top_border_4" blockinput="false" noclick="true" visible="0" >
 									<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0.6h" color="#136c8542" blockinput="false" noclick="true"/>
-									<frame texture="/ui/frames/roundframe.tga" color="#1c90c0" borderthickness="0.6h" blockinput="false" noclick="true"/>									
+									<frame texture="/ui/frames/roundframe.tga" color="#1c90c0" borderthickness="0.6h" blockinput="false" noclick="true"/>
 									<image x="-1.6h" width="2.2h" height="4.4h" hflip="true" align="left" valign="center" texture="/ui/fe2/store/avatars_display/side_ornate_trim.tga" blockinput="false" noclick="true" />
-									<image x="1.6h" width="2.2h" height="4.4h" align="right" valign="center" texture="/ui/fe2/store/avatars_display/side_ornate_trim.tga" blockinput="false" noclick="true" />																											
+									<image x="1.6h" width="2.2h" height="4.4h" align="right" valign="center" texture="/ui/fe2/store/avatars_display/side_ornate_trim.tga" blockinput="false" noclick="true" />
 									<panel x="-1.0h" y="5.8h" width="10.0h" height="5.0h" align="left" blockinput="false" noclick="true">
 										<image texture="/ui/fe2/elements/new_banner.tga" color="#29c0ff" blockinput="false" noclick="true" />
 										<label y="0.8h" textalign="center" font="dyn_10" color="1 1 1 1" outline="true" content="general_new" blockinput="false" noclick="true" />
 									</panel>
 								</panel>
-								
+
 								<!-- Ultimate Indication -->
 								<panel name="game_lobby_card_avatar_top_border_5" blockinput="false" noclick="true" visible="0" >
 									<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0.6h" color="#ff0b0b42" blockinput="false" noclick="true"/>
 									<frame texture="/ui/frames/roundframe.tga" color="#c92100" borderthickness="0.6h" blockinput="false" noclick="true"/>
 									<image x="-3.1h" width="4.4h" height="4.4h" align="left" valign="center" texture="/ui/fe2/store/avatars_display/claw.tga" blockinput="false" noclick="true" />
-									<image x="3.1h" width="4.4h" height="4.4h" hflip="true" align="right" valign="center" texture="/ui/fe2/store/avatars_display/claw.tga" blockinput="false" noclick="true" />									
+									<image x="3.1h" width="4.4h" height="4.4h" hflip="true" align="right" valign="center" texture="/ui/fe2/store/avatars_display/claw.tga" blockinput="false" noclick="true" />
 									<panel x="-1.0h" y="5.8h" width="10.0h" height="5.0h" align="left" blockinput="false" noclick="true">
 										<image texture="/ui/fe2/elements/new_banner.tga" color="red" blockinput="false" noclick="true" />
 										<label y="0.8h" textalign="center" font="dyn_10" color="1 1 1 1" outline="true" content="general_ultimate" blockinput="false" noclick="true" />
 									</panel>
-								</panel>								
-								
+								</panel>
+
 								<panel name="game_lobby_card_avatar_name_container" y="-0.7h" grow="true" height="-1.9h" align="center" valign="bottom" float="right" padding="0.8h" noclick="true">
-									
+
 									<panel width="0.4h" height="100%" noclick="true"/>
-								
+
 									<!-- Icon -->
 									<panel width="100@" height="100%" noclick="true">
-										<image name="game_lobby_card_avatar_icon" texture="$invis" noclick="true"/>							
+										<image name="game_lobby_card_avatar_icon" texture="$invis" noclick="true"/>
 										<frame color="invisible" bordercolor="1 1 1 .2" borderthickness="1" noclick="true" />
 									</panel>
-									
+
 									<panel width="0.2h" height="100%" noclick="true">
 										<panel width="50%" color="0 0 0 1" align="left" noclick="true" />
 										<panel width="50%" color="1 1 1 .1" align="right" noclick="true" />
 									</panel>
-									
+
 									<panel grow="true" height="100%" noclick="true">
 										<!-- Hero Name -->
 										<label name="game_lobby_card_avatar_name" y="0.1h" fitx="true" font="dyn_14" color="1 1 1 1" outline="true" content="" noclick="true" />
 										<!-- Default Check -->
 										<panel width="14.0h" height="3.0h" valign="bottom" noclick="true">
 											<instance
-												name="Noptions_checkbox"	
+												name="Noptions_checkbox"
 												checkbox_name="game_lobby_card_avatar_default_checkbox"
 												width="100%" height="1.6h" y="-0.4h"
-												align="center" valign="bottom"					
+												align="center" valign="bottom"
 												font="dyn_10" label="general_default_avatar"
 												interactive="false"
 												checkbox_group="game_lobby_default_av_btns"
@@ -6362,21 +6359,21 @@
 											/>
 											<label name="game_lobby_card_avatar_ea_label" y="0.1h" fitx="true" font="dyn_12" color=".7 .7 .7 1" outline="true" content="mstore_category58" noclick="true" />
 										</panel>
-										
+
 									</panel>
 
 									<panel width="1.0h" height="100%" noclick="true"/>
-									
+
 								</panel>
-								
+
 							</panel>
-							
+
 
 							<!-- Footer - Purchase -->
-							<panel name="game_lobby_card_avatar_bottom_parent" y="1.4h" width="48.0h" height="6.4h" align="center" valign="bottom" noclick="true">			
+							<panel name="game_lobby_card_avatar_bottom_parent" y="1.4h" width="48.0h" height="6.4h" align="center" valign="bottom" noclick="true">
 								<frame y="-0.2h" height="7.0h" texture="/ui/frames/rounded_bg_white.tga" borderthickness="0.6h" color=".1 .1 .1 .6" blockinput="false" noclick="true"/>
-								<frame y="-0.2h" height="7.0h" texture="/ui/frames/roundframe.tga" color="1 1 1 .4" borderthickness="0.6h" blockinput="false" noclick="true"/>					
-								
+								<frame y="-0.2h" height="7.0h" texture="/ui/frames/roundframe.tga" color="1 1 1 .4" borderthickness="0.6h" blockinput="false" noclick="true"/>
+
 								<!-- Purchase -->
 								<panel name="game_lobby_avatar_splash_purchase" width="-190@" align="center" noclick="true" visible="1">
 									<panel name="game_lobby_avatar_splash_purchase_1" align="left" width="9.0h" noclick="true">
@@ -6397,31 +6394,31 @@
 										<instance name="AAVButton" button_name="game_lobby_card_esports_btn" label="mstore_esports_only" enabled="0" visible="0" />
 										<instance name="AAVButton" button_name="game_lobby_card_quests_btn" label="mstore_quests_only" enabled="0" visible="0" />
 										<instance name="AAVButton" button_name="game_lobby_card_coins_btn" label="mstore_needcoins" enabled="0" visible="0" />
-									</panel>										
+									</panel>
 									<panel y="-0.4h" height="3.6h" width="18h" align="center" valign="center" noclick="true" >
 										<instance name="AAVButton" onclicklua="self:DoEvent()" button_name="game_lobby_card_purchase_btn" label="mstore_purchase" enabled="1" visible="0" />
-									</panel>									
+									</panel>
 								</panel>
-								
+
 								<!-- Select Avatar -->
 								<panel width="-190@" align="center" noclick="true" visible="true" >
 									<panel y="-0.4h" height="3.6h" width="18h" align="center" valign="center" noclick="true" >
 										<instance name="AAVButton" onclicklua="self:DoEvent()" button_name="game_lobby_card_select_btn" label="globby_select_avatar" enabled="1" visible="0" />
 									</panel>
 								</panel>
-							
+
 								<!-- Left Move -->
 								<panel name="game_lobby_card_prev_btn" visible="0" x="-2.0h" y="-0.8h" width="120@" height="120%" align="left" noclick="true">
-									<image width="100@" height="100%" texture="/ui/fe2/store/promo/store_sales.tga" hflip="true" x="0.4h" noclick="true" />					
+									<image width="100@" height="100%" texture="/ui/fe2/store/promo/store_sales.tga" hflip="true" x="0.4h" noclick="true" />
 									<instance name="AAVPrevNextButton" rotation="90"
 										onclicklua="Game_Lobby:PrevViewedCard()"
 										onrightclicklua="Game_Lobby:HideCardception()"
 										onmousewheeldownlua="Game_Lobby:NextViewedCard()"
 										onmousewheeluplua="Game_Lobby:PrevViewedCard()"
 										onmouseover="PlaySound('/shared/sounds/ui/button_over_01.wav');"
-									/>	
+									/>
 								</panel>
-								
+
 								<!-- Right Move -->
 								<panel name="game_lobby_card_next_btn" visible="0" x="2.0h" y="-0.8h" width="120@" height="120%" align="right" noclick="true">
 									<image width="100@" height="100%" texture="/ui/fe2/store/promo/store_sales.tga" x="-0.4h" noclick="true" />
@@ -6433,14 +6430,14 @@
 										onmouseover="PlaySound('/shared/sounds/ui/button_over_01.wav');"
 									/>
 								</panel>
-								
+
 							</panel>
 
 							<!-- Footer -->
-							<panel name="game_lobby_eap_footer" y="1.1h" width="55.0h" height="6.4h" align="center" valign="bottom" noclick="true" visible="0">			
+							<panel name="game_lobby_eap_footer" y="1.1h" width="55.0h" height="6.4h" align="center" valign="bottom" noclick="true" visible="0">
 								<frame y="-0.2h" height="6.5h" texture="/ui/frames/rounded_bg_red.tga" borderthickness="0.6h" color=".1 .1 .1 .9" blockinput="false" noclick="true"/>
 								<frame y="-0.2h" height="6.5h" texture="/ui/frames/roundframe.tga" color="#e28e1b" borderthickness="0.6h" blockinput="false" noclick="true"/>
-								
+
 								<!-- Bundle Price -->
 								<panel x="2.0h" y="0.4h" width="16.5h" noclick="true">
 									<label textalign="center" font="dyn_10" color=".7 .7 .7 1" shadow="true" content="mstore_eap_bundle_selected" noclick="true" />
@@ -6449,10 +6446,10 @@
 										onclick="ShowWidget('gl_eap_bundleselect_dropup'); HideWidget('gl_eap_bundleselect_box');"
 									>
 										<frame texture="/ui/frames/rounded_bg_green.tga" borderthickness="0.6h" color="1 1 1 .8" blockinput="false" noclick="true"/>
-										<frame texture="/ui/frames/roundframe.tga" color="#e28e1b" borderthickness="0.6h" blockinput="false" noclick="true"/>						
-										
+										<frame texture="/ui/frames/roundframe.tga" color="#e28e1b" borderthickness="0.6h" blockinput="false" noclick="true"/>
+
 										<label name="gl_eap_selected_bundle_label" x="1.0h" y="-0.2h" height="100%" textvalign="center" font="dyn_16" color="#FFFFFF" shadow="true" content="mstore_eap_bundle_3" noclick="true" />
-																
+
 										<panel grow="true" height="100%" align="right" float="right" padding="0.5h" noclick="true">
 											<panel width="1" height="100%" valign="center" noclick="true">
 												<panel height="95%" color="0 0 0 1" valign="center" noclick="true" />
@@ -6461,19 +6458,19 @@
 												<image width="40@" height="40%" valign="center" texture="/ui/elements/arrow_down.tga" noclick="true" />
 											</panel>
 											<panel width="1" height="100%" color="invisible"/>
-										</panel>						
+										</panel>
 									</panel>
-									
+
 									<!-- Fake Combobox -->
 									<panel y="-3.8h" height="9.0h" align="center" name="gl_eap_bundleselect_dropup" visible="0" onhide="ShowWidget('gl_eap_bundleselect_box');" >
-									
+
 										<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0 0 .8" blockinput="false" noclick="true"/>
-										
+
 
 										<button color="invisible"
 											onmouseover=""
 											onmouseout=""
-											onclick="HideWidget('gl_eap_bundleselect_dropup');"	
+											onclick="HideWidget('gl_eap_bundleselect_dropup');"
 											onclicklua="Game_Lobby.SelectBundle(self, 1)"
 											onmouseoverlua="Game_Lobby.HoverBundle(self, 1)"
 											onmouseoutlua="Game_Lobby.RestoreHoverBundle(self, 1)"
@@ -6481,38 +6478,38 @@
 										>
 
 											<widgetstate statename="up">
-												<frame texture="/ui/frames/rounded_bg_green.tga" borderthickness="0" color="1 1 1 1" blockinput="false" noclick="true"/>					
+												<frame texture="/ui/frames/rounded_bg_green.tga" borderthickness="0" color="1 1 1 1" blockinput="false" noclick="true"/>
 											</widgetstate>
-											<widgetstate statename="over">							
-												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0.8 0 1" blockinput="false" noclick="true"/>							
+											<widgetstate statename="over">
+												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0.8 0 1" blockinput="false" noclick="true"/>
 											</widgetstate>
 											<widgetstate statename="down" x="1" y="1">
-												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0.8 0 1" blockinput="false" noclick="true"/>							
+												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0.8 0 1" blockinput="false" noclick="true"/>
 											</widgetstate>
 											<label x="1.0h" y="-0.1h" height="100%" textvalign="center" font="dyn_16" color="#FFFFFF" shadow="true" content="mstore_eap_bundle_1" noclick="true" />
 										</button>
-								
+
 										<button color="invisible"
 											onmouseover=""
 											onmouseout=""
 											onclick="HideWidget('gl_eap_bundleselect_dropup');"
 											onclicklua="Game_Lobby.SelectBundle(self, 2)"
 											onmouseoverlua="Game_Lobby.HoverBundle(self, 2)"
-											onmouseoutlua="Game_Lobby.RestoreHoverBundle(self, 2)"							
+											onmouseoutlua="Game_Lobby.RestoreHoverBundle(self, 2)"
 											y="3.0h" height="3.0h" align="center"
 										>
 
 											<widgetstate statename="up">
-												<frame texture="/ui/frames/rounded_bg_green.tga" borderthickness="0" color="1 1 1 1" blockinput="false" noclick="true"/>					
+												<frame texture="/ui/frames/rounded_bg_green.tga" borderthickness="0" color="1 1 1 1" blockinput="false" noclick="true"/>
 											</widgetstate>
-											<widgetstate statename="over">							
-												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0.8 0 1" blockinput="false" noclick="true"/>							
+											<widgetstate statename="over">
+												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0.8 0 1" blockinput="false" noclick="true"/>
 											</widgetstate>
 											<widgetstate statename="down" x="1" y="1">
-												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0.8 0 1" blockinput="false" noclick="true"/>							
+												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0.8 0 1" blockinput="false" noclick="true"/>
 											</widgetstate>
 											<label x="1.0h" y="-0.1h" height="100%" textvalign="center" font="dyn_16" color="#FFFFFF" shadow="true" content="mstore_eap_bundle_2" noclick="true" />
-										</button>	
+										</button>
 
 										<button color="invisible"
 											onmouseover=""
@@ -6525,22 +6522,22 @@
 										>
 
 											<widgetstate statename="up">
-												<frame texture="/ui/frames/rounded_bg_green.tga" borderthickness="0" color="1 1 1 1" blockinput="false" noclick="true"/>					
+												<frame texture="/ui/frames/rounded_bg_green.tga" borderthickness="0" color="1 1 1 1" blockinput="false" noclick="true"/>
 											</widgetstate>
-											<widgetstate statename="over">							
-												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0.8 0 1" blockinput="false" noclick="true"/>							
+											<widgetstate statename="over">
+												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0.8 0 1" blockinput="false" noclick="true"/>
 											</widgetstate>
 											<widgetstate statename="down" x="1" y="1">
-												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0.8 0 1" blockinput="false" noclick="true"/>							
+												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0" color="0 0.8 0 1" blockinput="false" noclick="true"/>
 											</widgetstate>
 											<label x="1.0h" y="-0.1h" height="100%" textvalign="center" font="dyn_16" color="#FFFFFF" shadow="true" content="mstore_eap_bundle_3" noclick="true" />
-										</button>	
-										
+										</button>
+
 										<frame color="invisible" borderthickness="1" bordercolor="#e28e1b" blockinput="false" noclick="true"/>
-										
+
 									</panel>
 								</panel>
-								
+
 								<!-- Purchase Buttons -->
 								<panel x="-2.0h" y="0.4h" width="16.5h" align="right" noclick="true" >
 									<panel name="gl_eap_purchase_cost" height="1.6h" valign="top" align="center" x="35%" noclick="1" >
@@ -6555,13 +6552,13 @@
 										<instance name="AAVButton" button_name="game_lobby_card_coins_btn_2" label="mstore_needcoins" enabled="0" visible="0" />
 										<instance name="AAVButton" onclicklua="self:DoEvent()" button_name="game_lobby_card_purchase_btn_2" label="mstore_purchase" enabled="1" visible="0" />
 										<instance name="AAVButton" onclicklua="self:DoEvent()" button_name="game_lobby_card_select_btn_2" label="globby_select_avatar" enabled="1" visible="0" />
-									</panel>					
-								</panel>				
-								
+									</panel>
+								</panel>
+
 								<!-- Release Date -->
 								<panel x="-0.2h" y="0.4h" width="12.0h" align="center" float="bottom" padding="0.3h" noclick="true"	>
-									<label name="game_lobby_eap_rl_date_label_1" fity="true" textalign="center" font="dyn_10" color=".7 .7 .7 1" shadow="true" content="mstore_releasedate" 
-										onevent="If(eapStartTime{id=1} gt 0,  SetText(Translate('mstore_releasedate')), SetText(Translate('mstore_playable')) );"			
+									<label name="game_lobby_eap_rl_date_label_1" fity="true" textalign="center" font="dyn_10" color=".7 .7 .7 1" shadow="true" content="mstore_releasedate"
+										onevent="If(eapStartTime{id=1} gt 0,  SetText(Translate('mstore_releasedate')), SetText(Translate('mstore_playable')) );"
 									/>
 									<label name="game_lobby_eap_rl_date_label_2" fity="true" textalign="center" font="dyn_14" color="white" shadow="true" content="--/--/----"
 										onevent="
@@ -6577,7 +6574,7 @@
 								<!-- Left Alt Star (EA Exclusive Alt Av) -->
 								<panel align="center" width="14h" height="14h" valign="bottom" x="-34.0h" y="-13h" noclick="true" name="gl_eap_star_left">
 									<panel name="gl_eap_left_star_1" noclick="true" visible="0">
-										<image texture="/ui/fe2/elements/price_star.tga" noclick="true"/>	
+										<image texture="/ui/fe2/elements/price_star.tga" noclick="true"/>
 										<panel width="100%" float="bottom" noclick="true" valign="center" grow="true">
 											<label fity="true" textalign="center" textvalign="center" font="dyn_12" color="white" shadow="true" content="mstore_noeap_includes" noclick="true" />
 											<label fity="true" textalign="center" textvalign="center" font="dyn_14" color="#ffe400" shadow="true" content="mstore_noeap_bonus" noclick="true" />
@@ -6593,11 +6590,11 @@
 										</panel>
 									</panel>
 								</panel>
-								
+
 								<!-- Right Alt Star (Regular Alt Av) -->
 								<panel align="center" width="14h" height="14h" valign="bottom" x="34.0h" y="-13h" noclick="true"  name="gl_eap_star_right">
 									<panel name="gl_eap_right_star_1" noclick="true" visible="0">
-										<image texture="/ui/fe2/elements/price_star.tga" noclick="true"/>	
+										<image texture="/ui/fe2/elements/price_star.tga" noclick="true"/>
 										<panel width="100%" float="bottom" noclick="true" valign="center" grow="true">
 											<label fity="true" textalign="center" textvalign="center" font="dyn_12" color="white" shadow="true" content="mstore_noeap_includes" noclick="true" />
 											<label fity="true" textalign="center" textvalign="center" font="dyn_14" color="#ffe400" shadow="true" content="mstore_noeap_exclusive" noclick="true" />
@@ -6614,43 +6611,43 @@
 										</panel>
 									</panel>
 
-								</panel>								
-								
-							</panel>							
-							
+								</panel>
+
+							</panel>
+
 							<!-- Did you know? -->
-							<panel name="game_lobby_card_avatar_hint" y="-6h" x="-41.5h" grow="1" regrow="1" width="40h" height="10h" align="center" valign="bottom" visible="0" noclick="0" float="bottom" padding="1.0h" 
+							<panel name="game_lobby_card_avatar_hint" y="-6h" x="-41.5h" grow="1" regrow="1" width="40h" height="10h" align="center" valign="bottom" visible="0" noclick="0" float="bottom" padding="1.0h"
 								onload="If(!VarExists('ui_lobby_avatar_hint_1'), DoEvent()); DoEvent(1);" onevent="CreateBool('ui_lobby_avatar_hint_1', false);" onevent1="SetVisible(!ui_lobby_avatar_hint_1);"
 								onclick="Set(ui_lobby_avatar_hint_1, true); SetSave('ui_lobby_avatar_hint_1', true); Call('game_lobby_card_avatar_hint', 'SetVisible(0)');"
 								onrightclick="Set(ui_lobby_avatar_hint_1, true); SetSave('ui_lobby_avatar_hint_1', true); Call('game_lobby_card_avatar_hint', 'SetVisible(0)');"
 								color="0 0 0 0.8"
-							>			
+							>
 								<frame y="0" texture="/ui/frames/rounded_bg_red.tga" borderthickness="0.6h" color=".1 .1 .1 .6" blockinput="false" noclick="true"/>
-								<frame y="0" texture="/ui/frames/roundframe.tga" color="#e28e1b" borderthickness="0.6h" blockinput="false" noclick="true"/>								
-								
+								<frame y="0" texture="/ui/frames/roundframe.tga" color="#e28e1b" borderthickness="0.6h" blockinput="false" noclick="true"/>
+
 								<label y="1.0h" fity="true" textalign="center" font="dyn_14" color="#FFCC00" shadow="true" wrap="1" onload="SetText(FormatStringNewLine(Translate('main_lobby_did_you_know')));" noclick="true" />
-								
-								<label fity="true" textalign="center" font="dyn_11" color="white" shadow="true" wrap="1" onload="SetText(FormatStringNewLine(Translate('main_lobby_avatar_tip_1')));" noclick="true" />							
-							
+
+								<label fity="true" textalign="center" font="dyn_11" color="white" shadow="true" wrap="1" onload="SetText(FormatStringNewLine(Translate('main_lobby_avatar_tip_1')));" noclick="true" />
+
 								<button
-									visible="1" 
-									x="-0.6h" y="0.6h"		
+									visible="1"
+									x="-0.6h" y="0.6h"
 									width="2.8h" height="2.8h"
 									align="right"
 									color="invisible"
 									onmouseover="PlaySound('/shared/sounds/ui/ccpanel/button_over_01.wav');"
 									onclick="Set(ui_lobby_avatar_hint_1, true); SetSave('ui_lobby_avatar_hint_1', true); Call('game_lobby_card_avatar_hint', 'SetVisible(0)');"
-									onrightclick="Set(ui_lobby_avatar_hint_1, true); SetSave('ui_lobby_avatar_hint_1', true); Call('game_lobby_card_avatar_hint', 'SetVisible(0)');"									
+									onrightclick="Set(ui_lobby_avatar_hint_1, true); SetSave('ui_lobby_avatar_hint_1', true); Call('game_lobby_card_avatar_hint', 'SetVisible(0)');"
 								>
 									<widgetstate statename="up">
 										<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0.5h" color="#dc0000" blockinput="false" noclick="true"/>
 										<frame texture="/ui/frames/roundframe.tga" color="0 0 0 1" borderthickness="0.5h" blockinput="false" noclick="true"/>
-										<image width="1.4h" height="1.4h" align="center" valign="center" color="1 1 1 1" texture="/ui/elements/closex.tga" noclick="true" />				
+										<image width="1.4h" height="1.4h" align="center" valign="center" color="1 1 1 1" texture="/ui/elements/closex.tga" noclick="true" />
 									</widgetstate>
 									<widgetstate statename="over">
 										<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0.5h" color="#910000" blockinput="false" noclick="true"/>
 										<frame texture="/ui/frames/roundframe.tga" color="0 0 0 1" borderthickness="0.5h" blockinput="false" noclick="true"/>
-										<image width="1.4h" height="1.4h" align="center" valign="center" color=".75 .75 .75 1" texture="/ui/elements/closex.tga" noclick="true" />		
+										<image width="1.4h" height="1.4h" align="center" valign="center" color=".75 .75 .75 1" texture="/ui/elements/closex.tga" noclick="true" />
 									</widgetstate>
 									<widgetstate statename="down" x="1" y="1">
 										<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0.5h" color="#910000" blockinput="false" noclick="true"/>
@@ -6658,9 +6655,9 @@
 										<image width="1.4h" height="1.4h" align="center" valign="center" color="1 1 1 1" texture="/ui/elements/closex.tga" noclick="true" />
 									</widgetstate>
 
-								</button>								
-							
-							</panel> 
+								</button>
+
+							</panel>
 						</panel>
 						
 						<panel name="game_lobby_cards_panel" width="30h" height="4h" align="center" valign="bottom" y="-6h" color="invisible">
@@ -6676,24 +6673,24 @@
 
 						<button
 							visible="1" name="game_lobby_avatar_splash_close"
-							x="5.0h" y="1.9h"		
+							x="5.0h" y="1.9h"
 							width="2.8h" height="2.8h"
 							align="right"
 							color="invisible"
 							onclick="PlaySound('/shared/sounds/ui/ccpanel/button_close_02.wav');"
 							onmouseover="PlaySound('/shared/sounds/ui/ccpanel/button_over_01.wav');"
 							onclicklua="Game_Lobby:HideCardception()"
-							onrightclicklua="Game_Lobby:HideCardception()"									
+							onrightclicklua="Game_Lobby:HideCardception()"
 						>
 							<widgetstate statename="up">
 								<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0.5h" color="#dc0000" blockinput="false" noclick="true"/>
 								<frame texture="/ui/frames/roundframe.tga" color="0 0 0 1" borderthickness="0.5h" blockinput="false" noclick="true"/>
-								<image width="1.4h" height="1.4h" align="center" valign="center" color="1 1 1 1" texture="/ui/elements/closex.tga" noclick="true" />				
+								<image width="1.4h" height="1.4h" align="center" valign="center" color="1 1 1 1" texture="/ui/elements/closex.tga" noclick="true" />
 							</widgetstate>
 							<widgetstate statename="over">
 								<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0.5h" color="#910000" blockinput="false" noclick="true"/>
 								<frame texture="/ui/frames/roundframe.tga" color="0 0 0 1" borderthickness="0.5h" blockinput="false" noclick="true"/>
-								<image width="1.4h" height="1.4h" align="center" valign="center" color=".75 .75 .75 1" texture="/ui/elements/closex.tga" noclick="true" />		
+								<image width="1.4h" height="1.4h" align="center" valign="center" color=".75 .75 .75 1" texture="/ui/elements/closex.tga" noclick="true" />
 							</widgetstate>
 							<widgetstate statename="down" x="1" y="1">
 								<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0.5h" color="#910000" blockinput="false" noclick="true"/>
@@ -6701,13 +6698,10 @@
 								<image width="1.4h" height="1.4h" align="center" valign="center" color="1 1 1 1" texture="/ui/elements/closex.tga" noclick="true" />
 							</widgetstate>
 
-						</button>							
-						
-					</panel>					
-					
-					
-				
-					
+						</button>
+
+					</panel>
+
 					<!--
 					Trigger('GameLobbyHeroPurchase',
 						param0, 			## hero entity ##
@@ -6891,7 +6885,7 @@
 										SetModelScale(GetHeroPreviewScaleFromProduct(param0));
 										"
 									/>
-									<frame color="invisible" bordercolor=".2 .2 .2 1" borderthickness="1" noclick="true" 
+									<frame color="invisible" bordercolor=".2 .2 .2 1" borderthickness="1" noclick="true"
 										watch="GameLobbyHeroPurchase" ontrigger="If(param1, SetBorderColor('1.0 0.74 0.0 0.8'), SetBorderColor('.2 .2 .2 1'));"
 									/>
 
@@ -6901,7 +6895,7 @@
 											noclick="true"
 											watch="GameLobbyHeroPurchase"
 											ontrigger="SetTexture(GetEntityIconPath(param0));"
-											resourcecontext="lobby" 
+											resourcecontext="lobby"
 										/>
 										<frame color="invisible" bordercolor=".2 .2 .2 1" borderthickness="1" noclick="true"
 											watch="GameLobbyHeroPurchase" ontrigger="If(param1, SetBorderColor('1.0 0.74 0.0 0.8'), SetBorderColor('.2 .2 .2 1'));"
@@ -6910,10 +6904,10 @@
 								</panel>
 
 								<panel name="globby_PurchaseHero_4" x="-0.4h" width="-31.0h" align="right" float="bottom" padding="0.6h">
-									<label y="0.8h" fity="true" width="-1.0h" align="center" textalign="center" font="dyn_12" color="#FFCC00" shadow="true" wrap="true" content="globby_purchase_txt1" noclick="true" 
+									<label y="0.8h" fity="true" width="-1.0h" align="center" textalign="center" font="dyn_12" color="#FFCC00" shadow="true" wrap="true" content="globby_purchase_txt1" noclick="true"
 										watch="GameLobbyHeroPurchase" ontrigger="If(param1, SetText(Translate('globby_purchase_eap_txt1')), SetText(Translate('globby_purchase_txt1')));"
 									/>
-									<label fity="true" fitypadding="0.3h" width="-1.0h" align="center" textalign="center" font="dyn_11" color=".8 .8 .8 1" shadow="true" wrap="true" content="globby_purchase_txt2" noclick="true" 
+									<label fity="true" fitypadding="0.3h" width="-1.0h" align="center" textalign="center" font="dyn_11" color=".8 .8 .8 1" shadow="true" wrap="true" content="globby_purchase_txt2" noclick="true"
 										watch="GameLobbyHeroPurchase" ontrigger="If(param1, If(AccountStanding ge accountStanding_allModeThreshold, SetText(FormatStringNewLine(Translate('globby_purchase_eap_txt2')#'\\n'#Translate('globby_purchase_txt3'))), SetText(FormatStringNewLine(Translate('globby_purchase_eap_nonleg_txt2')#'\\n'#Translate('globby_purchase_txt3')))), SetText(Translate('globby_purchase_txt2')));"
 									/>
 
@@ -6923,14 +6917,14 @@
 											watch="GameLobbyHeroPurchase" ontrigger="If(param1, SetColor('#423408'), SetColor('#1d3d3f')); If(param1, SetBorderColor('#423408'), SetBorderColor('#1d3d3f'));"
 										/>
 										<frame texture="/ui/frames/roundframe.tga" color="0 0 0 1" borderthickness="0.6h"/>
-										
+
 										<panel grow="1" growinvis="0" regrow="1" width="100%" float="bottom" padding="0.7h" noclick="true">
 											<panel y="0.7h" width="-1.4h" height="2.4h" align="center" noclick="true">
 												<frame texture="/ui/frames/rounded_bg_white.tga" borderthickness="0.6h" color="#10777d"
 													watch="GameLobbyHeroPurchase" ontrigger="If(param1, SetColor('#c09309'), SetColor('#10777d')); If(param1, SetBorderColor('#c09309'), SetBorderColor('#10777d'));"
 												/>
 												<frame texture="/ui/frames/roundframe.tga" color="0 0 0 1" borderthickness="0.6h"/>
-												<label height="100%" textalign="center" textvalign="center" font="dyn_11" color="1 1 1 1" shadow="true" content="globby_purchase_btn" noclick="true" 
+												<label height="100%" textalign="center" textvalign="center" font="dyn_11" color="1 1 1 1" shadow="true" content="globby_purchase_btn" noclick="true"
 													watch="GameLobbyHeroPurchase" ontrigger="If(param1, SetText(Translate('globby_eap_btn')), SetText(Translate('globby_purchase_btn')));"
 												/>
 											</panel>
@@ -7002,7 +6996,7 @@
 												/>
 
 											</panel>
-											
+
 											<!-- EAP Redirect -->
 											<panel sticky="1" stickytoinvis="0" width="-1.4h" height="2.6h" align="center" noclick="true" visible="0" watch="GameLobbyHeroPurchase" ontrigger="SetVisible(param1);" >
 
@@ -7021,8 +7015,8 @@
 													onclicklua="UIManager.GetInterface('main'):HoNMainF('MainMenuPanelToggle', 'store_container', nil, false)"
 												/>
 
-											</panel>											
-											
+											</panel>
+
 											<!-- Use Silver -->
 											<panel sticky="1" stickytoinvis="0" width="-1.4h" height="2.6h" align="center" noclick="true" visible="true"  watch="GameLobbyHeroPurchase" ontrigger="SetVisible(!param1);" >
 
@@ -7146,11 +7140,11 @@
 													font="dyn_10"
 													enabled="true"
 													labelwatch="GameLobbyHeroPurchase"
-													labelontrigger="If(param10, SetText(Translate('globby_play_pass')), SetText(Translate('globby_play_token')));"													
+													labelontrigger="If(param10, SetText(Translate('globby_play_pass')), SetText(Translate('globby_play_token')));"
 													watch="GameLobbyHeroPurchase"
 													ontrigger="
 													SetOnclick(param9 # '(\'' # param0 # '\'); PlaySound(\'/shared/sounds/ui/hero_select/button_select.wav\'); Call(\'globby_PurchaseHero\', \'FadeOut(250);\');  ');
-													
+
 													"
 												/>
 
@@ -7166,13 +7160,13 @@
 
 							<!-- Hero Name -->
 							<panel y="-1.1h" width="96%" height="5.0h" align="center" noclick="true">
-								<image x="-50@" height="100%" width="-80@" align="right" utile="true" uscale=".4" texture="/ui/fe2/store/store_tab_center.tga" noclick="true" 
+								<image x="-50@" height="100%" width="-80@" align="right" utile="true" uscale=".4" texture="/ui/fe2/store/store_tab_center.tga" noclick="true"
 									resourcecontext="lobby" watch="GameLobbyHeroPurchase" ontrigger="If(param1, SetTexture('/ui/fe2/store/store_tab_premium_center.tga'), SetTexture('/ui/fe2/store/store_tab_center.tga'));"
 								/>
-								<image height="100%" width="50@" texture="/ui/fe2/store/store_tab_left.tga" noclick="true" 
+								<image height="100%" width="50@" texture="/ui/fe2/store/store_tab_left.tga" noclick="true"
 									resourcecontext="lobby" watch="GameLobbyHeroPurchase" ontrigger="If(param1, SetTexture('/ui/fe2/store/store_tab_premium_left.tga'), SetTexture('/ui/fe2/store/store_tab_left.tga'));"
 								/>
-								<image align="right" height="100%" width="50@" texture="/ui/fe2/store/store_tab_right.tga" noclick="true" 
+								<image align="right" height="100%" width="50@" texture="/ui/fe2/store/store_tab_right.tga" noclick="true"
 									resourcecontext="lobby" watch="GameLobbyHeroPurchase" ontrigger="If(param1, SetTexture('/ui/fe2/store/store_tab_premium_right.tga'), SetTexture('/ui/fe2/store/store_tab_right.tga'));"
 								/>
 								<image x="8%" y="10%" align="left" valign="top" height="50%" width="50@" texture="/ui/fe2/store/store_tab_connector.tga" noclick="true" />
@@ -7208,7 +7202,7 @@
 							watch=""
 							ontrigger=""
 						/>
-						
+
 						<!-- Status -->
 						<panel watch="gLobbyBuyHeroStatus" ontrigger="SetVisible(param0 == 1);" color="0 0 0 0.75" visible="false">
 							<panel align="center" valign="center" width="25h" height="6h" color="black">
@@ -7217,7 +7211,7 @@
 								<label align="right" x="-0.5h" width="-7h" shadow="true" color="white" font="dyn_12" textvalign="center" content="mstore_processing_elipses"/>
 							</panel>
 						</panel>
-						
+
 						<!-- Error -->
 						<panel name="globbyBuyHeroError" watch="gLobbyBuyHeroStatus" ontrigger="If(param0 == 3, DoEvent(0));" color="0 0 0 0.75" visible="false"
 							onevent0="FadeIn(200);"
@@ -7254,7 +7248,7 @@
 							</panel>
 						</panel>
 					</panel>
-					
+
 					<!-- Success -->
 					<panel width="100%" height="100%" color="0 0 0 0.5" name="gLobbyBuyHeroSuccess" onevent0="FadeIn(150);" onevent1="FadeOut(150);" visible="false">
 						<panel width="30h" grow="true" align="center" valign="center" noclick="1">
@@ -7290,7 +7284,7 @@
 													align="center"
 													label="general_ok"
 													onclick="PlaySound('/ui/fe2/store/sounds/purchase_avatar.wav'); Set('_gLobbyHeroPurchaseEntity', ''); Call('globby_PurchaseHero', 'FadeOut(250);'); CallEvent('gLobbyBuyHeroSuccess', 1);"
-												/>												
+												/>
 											</panel>
 											<panel height="0.5h"/>
 										</panel>
@@ -7300,7 +7294,7 @@
 							</panel>
 						</panel>
 					</panel>
-					<!-- / F2P Purchase Hero -->					
+					<!-- / F2P Purchase Hero -->
 				</panel>
 			</panel>
 
@@ -7335,13 +7329,11 @@
 				</panel>
 			</panel>
 
-
-
 			<panel  name="asset_loading_center" watch="GamePhase" ontrigger="SetVisible(param0 == 4);" color="invisible" y="-110h"  align="center" width="29.1h" height="58.2h" noclick="1" visible="0">
 				<panel  y="-3.6h" noclick="1">
 					<panel color="white"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
-						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/pod_race_post.tga', 'lobby', self)" 						
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/pod_race_post.tga', 'lobby', self)"
 					/>
 					<panel align="center" width="7h"  float="bottom" padding="4.89h">
 						<panel y="7.8h" height="4h">
@@ -7390,7 +7382,6 @@
 				</panel>
 			</panel>
 		</panel>
-
 
 		<panel width="100%" height="100%" color="0 0 0 0.5" name="gLobbyBuyAvatarSuccess" onevent0="FadeIn(150);" onevent1="FadeOut(150);" visible="false">
 			<panel width="30h" grow="true" align="center" valign="center" noclick="1">
@@ -7450,7 +7441,7 @@
 							<frame texture="/ui/frames/tooltip_bg.tga" color="#2c4b6c" noclick="1"/>
 							<frame color="invisible" bordercolor="#455166" borderthickness="1" noclick="1" />
 							<panel width="-1.0h" align="center" color="invisible" noclick="1" grow="true" regrow="true" float="bottom">
-								<panel height="0.5h"/>						
+								<panel height="0.5h"/>
 								<label font="dyn_10" wrap="true" fity="true" color="white" shadow="true" watch0="gLobbyBuyAvatarResults" ontrigger0="If((param1 == 0 or param1 == 1) and param2 ge 0, SetText(Translate('mstore_error' # param2)));" watch1="gLobbyBuyAvatarStatus" ontrigger1="If(param0 == 3, SetText(Translate('mstore_error_connect')));"/>
 								<panel height="0.5h"/>
 								<panel width="100%" grow="true">
@@ -7597,7 +7588,6 @@
 				</panel>
 			</panel>
 		</panel>
-
 
 		<panel width="100%" height="100%" color="0 0 0 0.5" name="globby_buyavatar_confirmationPrem" visible="false"
 			onevent0="FadeIn(150);Trigger('CardListRefresh');"
@@ -7800,7 +7790,7 @@
 											label="mstore_purchase"
 											onclick="
 												PlaySound('/ui/fe2/store/sounds/purchase_avatar.wav');
-												SubmitForm('MicroStore', 
+												SubmitForm('MicroStore',
 													'account_id', GetAccountID(),
 													'request_code', '4',
 													'cookie', GetCookie(),
@@ -7831,8 +7821,7 @@
 				</panel>
 			</panel>
 		</panel>
-		
+
 	</template>
-	
 
 </package>

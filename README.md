@@ -1,5 +1,5 @@
 # HoN-mmr-mod
-Adjustment to the game_lobby.package file to show mmr in the lobbies. This mod is for version 3.9.3 of HoN.
+Adjustment to the game_lobby.package file to show mmr in the lobbies. This mod is for version 3.9.4 of HoN.
 
 There are multiple ways to enable mods in HoN. the easiest way is described below:
 Copy the game_lobby.package file to C:\<your documents>\Heroes of Newerth\game\ui\fe
