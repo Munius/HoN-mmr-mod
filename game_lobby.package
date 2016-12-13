@@ -26,6 +26,7 @@
 	<trigger name="HeroSelectInfogt" />
 	<trigger name="HeroSelectInfofp" />
 	<trigger name="HeroSelectInfosp" />
+	<trigger name="HeroSelectInfosm" />
 	<trigger name="ClearHeroSelectInfo" />
 	<trigger name="WalkthroughHighlightReady" />
 	<trigger name="RefereeControlPage" />
@@ -983,13 +984,13 @@
 							/>
 						</panel>
 
-						<image name="player_slot_panel3_cover{index}" noclick="true" onload="Rotate(90, 1);"  hflip="1"
+						<image texture="/ui/fe2/lobby/mastery/panel3_cover_iron.tga" name="player_slot_panel3_cover{index}" noclick="true" onload="Rotate(90, 1);"  hflip="1"
 							resourcecontext="lobby" watch9="MainRegisterTextures"
 							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/mastery/panel3_cover_iron.tga', 'lobby', self)"
 							watch="HeroSelectMastery{index}"
 				  		   	ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel3_cover_'..param0..'.tga')"
 						/>
-						<image name="player_slot_bolt{index}" y="-4.0%" x="0.5@" width="12.5@" height="12.5%" align="center" valign="center" noclick="true" onload="Rotate(0, 1);"
+						<image texture="/ui/fe2/lobby/bolt.tga" name="player_slot_bolt{index}" y="-4.0%" x="0.5@" width="12.5@" height="12.5%" align="center" valign="center" noclick="true" onload="Rotate(0, 1);"
 							resourcecontext="lobby" watch9="MainRegisterTextures"
 							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/bolt.tga', 'lobby', self)"
 						/>
@@ -1677,6 +1678,19 @@
 					<label y="-3.0%" height="100%" textalign="center" textvalign="center" font="dyn_8" color="white" content="850" watch="HeroSelectPlayerInfo{index}" ontrigger="SetText(param17);"/>
 				</panel>
 
+				<!-- Rank -->
+				<panel name="HeroSelectPlayerRank{index}" align="right" x="-33.2%" y="52%" width="38%" height="32i" visible="0" noclick="1" >
+					<panel watch="LobbyPlayerInfo{index}" ontriggerlua="self:SetVisible(IsCampaignMatch())" noclick="0"/>
+					<panel visible="0" align="right" noclick="1" 
+						watch="LobbyPlayerInfo{index}"
+						ontriggerlua="Game_Lobby:SetupCampainLevel(self, {index}, param0, param18, param86)" 
+						>
+						<image name="HeroSelectPlayerRankBgImage{index}" align="center" x="0" width="256i" height="64i" valign="center" hflip="true" noclick="1" />
+						<image name="HeroSelectPlayerRankImage{index}" align="right" x="8i" y="0" width="56i" height="56i" valign="center" noclick="1" />
+						<label name="HeroSelectPlayerRankLabel{index}" align="right" x="-30%" y="10%" width="-25%" textvalign="center" font="dyn_10" color="white" shadow="true" shadowcolor="#000000" outline="true" outlinecolor="#000000" textalign="right" noclick="1" />
+					</panel>
+				</panel>
+
 			</panel>
 
 			<!-- Lock Button -->
@@ -1864,6 +1878,7 @@
 					Call('HeroSelectPlayerPSR{index}', 'FadeOut(1);');
 					Call('HeroSelectPlayerPSRChange{index}', 'FadeOut(1);');
 					Call('HeroSelectPlayerInfoName{index}', 'FadeOut(1);');
+					Call('HeroSelectPlayerRank{index}', 'FadeOut(1);');
 
 					Call('player_slot_mute_button{index}', 'FadeOut(1);');
 					Call('player_slot_leave_button{index}', 'FadeOut(1);');
@@ -1943,6 +1958,7 @@
 					Call('HeroSelectPlayerPSR{index}', 'FadeIn(400);');
 					Call('HeroSelectPlayerPSRChange{index}', 'FadeIn(400);');
 					Call('HeroSelectPlayerInfoName{index}', 'FadeIn(400);');
+					Call('HeroSelectPlayerRank{index}', 'FadeIn(400);');
 					Call('player_slot_mute_button{index}', 'FadeIn(300);');
 					Call('player_slot_leave_button{index}', 'FadeIn(400);');
 					Call('play_slot_kick_bot_button{index}', 'FadeIn(400);');
@@ -2003,6 +2019,7 @@
 					Call('HeroSelectPlayerPSR{index}', 'FadeOut(201);');
 					Call('HeroSelectPlayerPSRChange{index}', 'FadeOut(201);');
 					Call('HeroSelectPlayerInfoName{index}', 'FadeOut(201);');
+					Call('HeroSelectPlayerRank{index}', 'FadeOut(201);');
 
 					Call('player_slot_mute_button{index}', 'FadeOut(201);');
 					Call('player_slot_leave_button{index}', 'FadeOut(201);');
@@ -2214,7 +2231,7 @@
 							watch="HeroSelectMastery{index}"
 				  			ontriggerlua="self:SetTexture('/ui/fe2/lobby/mastery/panel3_cover_'..param0..'.tga')"
 						/>
-						<image name="player_slot_bolt{index}" y="-4.0%" x="0.5@" width="12.5@" height="12.5%" align="center" valign="center" noclick="true" onload="Rotate(0, 1);"
+						<image name="player_slot_bolt{index}" texture="/ui/fe2/lobby/bolt.tga" y="-4.0%" x="0.5@" width="12.5@" height="12.5%" align="center" valign="center" noclick="true" onload="Rotate(0, 1);"
 							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/bolt.tga', 'lobby', self)" resourcecontext="lobby" watch9="MainRegisterTextures"
 						/>
 
@@ -2896,6 +2913,21 @@
 					<label y="-3.0%" height="100%" textalign="center" textvalign="center" font="dyn_8" color="white" content="850" watch="HeroSelectPlayerInfo{index}" ontrigger="SetText(param17);"/>
 				</panel>
 
+				<!-- Rank -->
+				<panel name="HeroSelectPlayerRank{index}" align="left" x="33.2%" y="52%" width="38%" height="32i" visible="0" noclick="1">
+					<panel watch="LobbyPlayerInfo{index}" ontriggerlua="self:SetVisible(IsCampaignMatch())" noclick="0"/>
+					<panel visible="0" noclick="1"
+						watch="LobbyPlayerInfo{index}"
+						ontriggerlua="
+							Game_Lobby:SetupCampainLevel(self, {index}, param0, param18, param86)
+						" 
+						>
+						<image name="HeroSelectPlayerRankBgImage{index}" align="center" x="0" width="256i" height="64i" valign="center" noclick="1" />
+						<image name="HeroSelectPlayerRankImage{index}" align="left" x="-8i" y="0" width="56i" height="56i" valign="center" noclick="1" />
+						<label name="HeroSelectPlayerRankLabel{index}" align="left" x="30%" y="5%"  width="-25%" textvalign="center" font="dyn_10" color="white" shadow="true" shadowcolor="#000000" outline="true" outlinecolor="#000000" noclick="1" />
+					</panel>
+				</panel>
+
 			</panel>
 
 			<!-- Lock Button -->
@@ -3075,6 +3107,7 @@
 					Call('HeroSelectPlayerPSR{index}', 'FadeOut(1);');
 					Call('HeroSelectPlayerPSRChange{index}', 'FadeOut(1);');
 					Call('HeroSelectPlayerInfoName{index}', 'FadeOut(1);');
+					Call('HeroSelectPlayerRank{index}', 'FadeOut(1);');
 
 					Call('player_slot_mute_button{index}', 'FadeOut(1);');
 					Call('player_slot_mute_button{index}', 'FadeOut(1);');
@@ -3147,6 +3180,7 @@
 					Call('HeroSelectPlayerPSR{index}', 'FadeIn(400);');
 					Call('HeroSelectPlayerPSRChange{index}', 'FadeIn(400);');
 					Call('HeroSelectPlayerInfoName{index}', 'FadeIn(400);');
+					Call('HeroSelectPlayerRank{index}', 'FadeIn(400);');
 					Call('player_slot_mute_button{index}', 'FadeIn(300);');
 					Call('player_slot_leave_button{index}', 'FadeIn(400);');
 					Call('play_slot_kick_bot_button{index}', 'FadeIn(400);');
@@ -3201,6 +3235,7 @@
 					Call('HeroSelectPlayerPSR{index}', 'FadeOut(201);');
 					Call('HeroSelectPlayerPSRChange{index}', 'FadeOut(201);');
 					Call('HeroSelectPlayerInfoName{index}', 'FadeOut(201);');
+					Call('HeroSelectPlayerRank{index}', 'FadeOut(201);');
 
 					Call('player_slot_mute_button{index}', 'FadeOut(201);');
 					Call('player_slot_leave_button{index}', 'FadeOut(201);');
@@ -4253,6 +4288,14 @@
 			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="9"/>
 		</panel>
 	</template>
+	
+	<template name="hero_sm_row">
+		<panel height="5.35h" width="5.2h" float="right" padding="0.72h" align="center" valign="center" noclick="true">
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="0" align="center" width="150%" height="150%"/>
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="1" align="center" width="150%" height="150%"/>
+			<instance name="hero_button_normal" gameMode="{gameMode}" row="{row}" row_size="10" index="2" align="center" width="150%" height="150%"/>
+		</panel>
+	</template>
 
 	<template name="altavatar_full_item">
 		<panel
@@ -4853,6 +4896,8 @@
 				if(param0() gt 5, DoEvent(6));
 			"
 			onload="
+				DoEvent();
+				
 				if(param0() == 0, DoEvent(0));
 				if(param0() == 1, DoEvent(1));
 				if(param0() == 2, DoEvent(2));
@@ -4860,6 +4905,12 @@
 				if(param0() == 4, DoEvent(4));
 				if(param0() == 5, DoEvent(5));
 				if(param0() gt 5, DoEvent(6));
+			"
+			
+			oneventlua="
+				if (Game_Lobby ~= nil) and (Game_Lobby.contextActive ~= nil) and (Game_Lobby.contextActive.libcards ~= nil) then
+					Game_Lobby.contextActive.libcards = false
+				end
 			"
 
 			onevent0lua="Game_Lobby.resetGamePhase = true"
@@ -4918,6 +4969,8 @@
 				Set('_raceResult',1);
 
 				CallEventParamsX('altav_full', 2, 2);
+
+				SubmitForm('PlayerStatsMastery', 'f', 'show_stats', 'nickname', StripClanTag(GetAccountName()), 'cookie', GetCookie(), 'table', 'mastery');
 			"
 
 			onevent3="
@@ -4938,6 +4991,8 @@
 				Set('_raceResult',1);
 
 				CallEventParamsX('altav_full', 2, 2);
+
+				SubmitForm('PlayerStatsMastery', 'f', 'show_stats', 'nickname', StripClanTag(GetAccountName()), 'cookie', GetCookie(), 'table', 'mastery');
 			"
 
 			onevent4="
@@ -4983,10 +5038,10 @@
 
 		<panel  name="lobby_blackout" align="center" visible="0" width="175%" color="0 0 0 .4" />
 
-		<panel  name="lobby_main_panel"  y="-110h" watch="GamePhase" ontrigger="SetVisible(param0 gt 0 and param0 lt 5);">
+		<panel  name="lobby_main_panel"  y="-110h" watch="GamePhase" ontrigger="SetVisible(param0 gt 0 and param0 lt 5);" >
 
 			<panel noclick="true" >
-				<image y="-2h" x="-54.1h" align="center"  height="95.5h"  width="50@"
+				<image  texture="lobby/hero_picker_post.tga" y="-2h" x="-54.1h" align="center"  height="95.5h"  width="50@"
 					resourcecontext="lobby" watch9="MainRegisterTextures"
 					ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker_post.tga', 'lobby', self)"
 				/>
@@ -5100,18 +5155,6 @@
 									If(StringEmpty(param1), SetText(Translate('game_lobby_no_referee')), SetText(param1));
 									If(StringEmpty(param1), SetColor('gray'), SetColor('white'));
 								"/>
-
-								<instance name="player_action_button"
-									x="-150@" width="80@" height="80%" valign="center"
-									onmouseover="ShowWidget('ModSpectatorTip'); Trigger('ModSpectatorTipTrigger', Translate('game_lobby_referee_ctrl_tip', 'name', '') );"
-									onmouseout="HideWidget('ModSpectatorTip');"
-									onhide="HideWidget('ModSpectatorTip');"
-									texture="refereeGM"
-									onclick="PlaySound('/shared/sounds/ui/lobby/button_referee.wav'); Trigger('RefereeControlPage', 1); HideWidget('ModSpectatorTip');"
-									watch="LobbyReferee0"
-									ontriggerlua="self:SetVisible(AtoB(param5))"
-									visible="0"
-								/>
 							</panel>
 
 							<panel color="invisible" align="right" width="44%" >
@@ -5175,7 +5218,20 @@
 
 					</panel>
 
-					<image align="center" y="0.3h" valign="bottom" width="174%" height="87@" noclick="1"
+					<instance name="player_action_button"
+						align="center" valign="top" width="3h" height="3h"
+						x="-20h" y="3.5h" 
+						onmouseover="ShowWidget('ModSpectatorTip'); Trigger('ModSpectatorTipTrigger', Translate('game_lobby_referee_ctrl_tip', 'name', '') );"
+						onmouseout="HideWidget('ModSpectatorTip');"
+						onhide="HideWidget('ModSpectatorTip');"
+						texture="refereeGM"
+						onclick="PlaySound('/shared/sounds/ui/lobby/button_referee.wav'); Trigger('RefereeControlPage', 1); HideWidget('ModSpectatorTip');"
+						watch="LobbyRefereeGM"
+						ontriggerlua="self:SetVisible(AtoB(param0))"
+						visible="0"
+					/>
+
+					<image texture="/ui/fe2/lobby/game_info.tga" align="center" y="0.3h" valign="bottom" width="174%" height="87@" noclick="1"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
 						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/game_info.tga', 'lobby', self)"
 					/>
@@ -5838,7 +5894,7 @@
 						group="lobby_hero_picker_parents"
 
 					>
-						<image x="0.1h" width="23%" height="102%" y="3%" align="center"
+						<image texture="/ui/fe2/lobby/center_post_skinny.tga" x="0.1h" width="23%" height="102%" y="3%" align="center"
 							resourcecontext="lobby" watch9="MainRegisterTextures"
 							ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/center_post_skinny.tga', 'lobby', self)"
 						/>
@@ -6084,12 +6140,29 @@
 						</panel>
 					</panel>
 
+					<!-- Solo Mode -->
+					<panel
+						name="sm_list"
+						visible="0"
+						x="6.2h" y="0.8h"
+						width="31h"
+						float="bottom" padding="1.5%"
+						group="lobby_hero_picker_parents"
+					>
+						<instance name="hero_sm_row" gameMode="sm" row="0"/>
+					</panel>
+					<panel name="sm_list_bg" visible="0" y="-0.31%" width="234@" height="117%" align="center" valign="center" noclick="1" color="white"
+						resourcecontext="lobby" watch9="MainRegisterTextures"
+						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker.tga', 'lobby', self)"
+						group="lobby_hero_picker_parents"
+					/>
+					
 					<panel name="hero_picker_outline" y="-0.31%" width="234@" height="117%" align="center" valign="center" noclick="1" color="white" visible="0"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
 						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker_larger.tga', 'lobby', self)"
 					/>
 
-					<panel name="hero_picker_outline_filter" y="-0.31%" width="234@" height="117%" align="center" valign="center" noclick="1" color="white" visible="0"
+					<panel name="hero_picker_outline_filter" texture="/ui/fe2/lobby/hero_picker_larger_filter.tga" y="-0.31%" width="234@" height="117%" align="center" valign="center" noclick="1" color="white" visible="0"
 						resourcecontext="lobby" watch9="MainRegisterTextures"
 						ontrigger9lua="ResourceManager.RegisterTexture('/ui/fe2/lobby/hero_picker_larger_filter.tga', 'lobby', self)"
 					/>
@@ -6998,8 +7071,7 @@
 											</panel>
 
 											<!-- EAP Redirect -->
-											<panel sticky="1" stickytoinvis="0" width="-1.4h" height="2.6h" align="center" noclick="true" visible="0" watch="GameLobbyHeroPurchase" ontrigger="SetVisible(param1);" >
-
+											<panel sticky="1" stickytoinvis="0" width="-1.4h" height="2.6h" align="center" noclick="1" visible="0" watch="GameLobbyHeroPurchase" ontrigger="SetVisible(param1);" >
 												<instance name="button2" button_name="gameLobbyHeroGoToEAPButton"
 													width="-7.5h"
 													height="-0.4h"
@@ -7012,9 +7084,10 @@
 														Set('microStore_targetCategory', 58);
 														HideWidget('globby_PurchaseHero');
 														"
-													onclicklua="UIManager.GetInterface('main'):HoNMainF('MainMenuPanelToggle', 'store_container', nil, false)"
+													onclicklua="
+														local store = GetCvarBool('cg_store2_') and 'store_container2' or 'store_container'
+														UIManager.GetInterface('main'):HoNMainF('MainMenuPanelToggle', store, nil, false)"
 												/>
-
 											</panel>
 
 											<!-- Use Silver -->
