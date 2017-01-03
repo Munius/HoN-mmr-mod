@@ -1680,14 +1680,15 @@
 
 				<!-- Rank -->
 				<panel name="HeroSelectPlayerRank{index}" align="right" x="-33.2%" y="52%" width="38%" height="32i" visible="0" noclick="1" >
-					<panel watch="LobbyPlayerInfo{index}" ontriggerlua="self:SetVisible(IsCampaignMatch())" noclick="0"/>
+					<panel watch="LobbyPlayerInfo{index}" ontriggerlua="self:SetVisible(false)" noclick="0"/>
 					<panel visible="0" align="right" noclick="1" 
 						watch="LobbyPlayerInfo{index}"
 						ontriggerlua="Game_Lobby:SetupCampainLevel(self, {index}, param0, param18, param86)" 
 						>
-						<image name="HeroSelectPlayerRankBgImage{index}" align="center" x="0" width="256i" height="64i" valign="center" hflip="true" noclick="1" />
+						<!-- <image name="HeroSelectPlayerRankBgImage{index}" align="center" x="0" width="256i" height="64i" valign="center" hflip="true" noclick="1" />
 						<image name="HeroSelectPlayerRankImage{index}" align="right" x="8i" y="0" width="56i" height="56i" valign="center" noclick="1" />
-						<label name="HeroSelectPlayerRankLabel{index}" align="right" x="-30%" y="10%" width="-25%" textvalign="center" font="dyn_10" color="white" shadow="true" shadowcolor="#000000" outline="true" outlinecolor="#000000" textalign="right" noclick="1" />
+						<label name="HeroSelectPlayerRankLabel{index}" align="right" x="-30%" y="10%" width="-25%" textvalign="center" font="dyn_10" color="white" shadow="true" shadowcolor="#000000" outline="true" outlinecolor="#000000" textalign="right" noclick="1" /> 
+						-->
 					</panel>
 				</panel>
 
@@ -2915,16 +2916,17 @@
 
 				<!-- Rank -->
 				<panel name="HeroSelectPlayerRank{index}" align="left" x="33.2%" y="52%" width="38%" height="32i" visible="0" noclick="1">
-					<panel watch="LobbyPlayerInfo{index}" ontriggerlua="self:SetVisible(IsCampaignMatch())" noclick="0"/>
+					<panel watch="LobbyPlayerInfo{index}" ontriggerlua="self:SetVisible(false)" noclick="0"/>
 					<panel visible="0" noclick="1"
 						watch="LobbyPlayerInfo{index}"
 						ontriggerlua="
 							Game_Lobby:SetupCampainLevel(self, {index}, param0, param18, param86)
 						" 
 						>
-						<image name="HeroSelectPlayerRankBgImage{index}" align="center" x="0" width="256i" height="64i" valign="center" noclick="1" />
+						<!-- <image name="HeroSelectPlayerRankBgImage{index}" align="center" x="0" width="256i" height="64i" valign="center" noclick="1" />
 						<image name="HeroSelectPlayerRankImage{index}" align="left" x="-8i" y="0" width="56i" height="56i" valign="center" noclick="1" />
 						<label name="HeroSelectPlayerRankLabel{index}" align="left" x="30%" y="5%"  width="-25%" textvalign="center" font="dyn_10" color="white" shadow="true" shadowcolor="#000000" outline="true" outlinecolor="#000000" noclick="1" />
+						-->
 					</panel>
 				</panel>
 
